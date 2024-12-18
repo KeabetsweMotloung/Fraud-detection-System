@@ -1,63 +1,65 @@
-from data_preprocessing import split_data, load_csv, prepare_data
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix, f1_score, recall_score, precision_score
-from sklearn.model_selection import GridSearchCV, StratifiedKFold
-from sklearn.metrics import roc_auc_score, precision_recall_curve
+from xgboost import XGBClassifier
+from sklearn.model_selection import RandomizedSearchCV, train_test_split
+from imblearn.pipeline import Pipeline
+from imblearn.over_sampling import SMOTE
+from sklearn.metrics import confusion_matrix, f1_score, recall_score, precision_score, roc_auc_score, precision_recall_curve
+import pandas as pd
+import time
+import numpy as np
 
-def evaluate_models(X_train, y_train, X_test, y_test):
-    # Define hyperparameter grids for tuning
-    param_grid_lr = {
-        'C': [0.001, 0.01, 0.1, 1, 10, 100],  # Regularization strength
-        'penalty': ['l1', 'l2'],               # Type of regularization
-        'solver': ['liblinear', 'saga'],        # Solver options
-        'class_weight': ['balanced', None]      # Class weight adjustment for imbalanced data
+def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
+    # Define a reduced hyperparameter grid for XGBoost
+    param_grid = {
+        'xgb__n_estimators': [100, 200, 300],
+        'xgb__max_depth': [6, 10, 15],
+        'xgb__learning_rate': [0.01, 0.1, 0.2],
+        'xgb__subsample': [0.8, 1.0],
+        'xgb__colsample_bytree': [0.8, 1.0],
+        # Handle class imbalance
+        'xgb__scale_pos_weight': [1, y_train.value_counts()[0] / y_train.value_counts()[1]] 
     }
 
-    # Initialize Logistic Regression model
-    log_reg = LogisticRegression(max_iter=2000)
+    # Create a pipeline with SMOTE and XGBoost
+    pipe = Pipeline([
+        ('smote', SMOTE(random_state=42)),
+        ('xgb', XGBClassifier(random_state=42, use_label_encoder=False, eval_metric='logloss'))
+    ])
 
-    # Stratified Cross-Validation setup to ensure balanced folds
-    cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+    # Initialize RandomizedSearchCV with more iterations to ensure thorough search
+    # 'cv=3' specifies 3-fold cross-validation
+    random_search = RandomizedSearchCV(estimator=pipe, param_distributions=param_grid, cv=3, scoring='roc_auc', n_iter=50, n_jobs=-1, verbose=3, random_state=42)
 
-    # GridSearchCV for hyperparameter tuning with Stratified CV
-    grid_search = GridSearchCV(estimator=log_reg, param_grid=param_grid_lr, cv=cv, scoring='roc_auc')
+    
+    start_time = time.time()
+    random_search.fit(X_train, y_train)
+    end_time = time.time()
+    
+    elapsed_time = end_time - start_time
+    print(f"Time taken for RandomizedSearchCV: {elapsed_time:.2f} seconds")
 
-    # Fit grid search to find the best hyperparameters
-    grid_search.fit(X_train, y_train)
-
-    # Best model from GridSearchCV
-    best_model = grid_search.best_estimator_
+    # Get the best model
+    best_model = random_search.best_estimator_
 
     # Display the best hyperparameters
-    print(f"Best Hyperparameters: {grid_search.best_params_}")
+    print("Best Hyperparameters:", random_search.best_params_)
 
-    # Make predictions
+   
     y_train_pred = best_model.predict(X_train)
     y_test_pred = best_model.predict(X_test)
 
-    # Training set performance metrics
-    model_train_confusion_matrix = confusion_matrix(y_train, y_train_pred)
-    model_train_f1_score = f1_score(y_train, y_train_pred)
-    model_train_recall_score = recall_score(y_train, y_train_pred)
-    model_train_precision_score = precision_score(y_train, y_train_pred)
+  
+    print("Training Performance:")
+    print(f"Confusion Matrix:\n{confusion_matrix(y_train, y_train_pred)}")
+    print(f"F1 Score: {f1_score(y_train, y_train_pred):.4f}")
+    print(f"Recall Score: {recall_score(y_train, y_train_pred):.4f}")
+    print(f"Precision Score: {precision_score(y_train, y_train_pred):.4f}")
 
-    # Testing set performance metrics
-    model_test_confusion_matrix = confusion_matrix(y_test, y_test_pred)
-    model_test_f1_score = f1_score(y_test, y_test_pred)
-    model_test_recall_score = recall_score(y_test, y_test_pred)
-    model_test_precision_score = precision_score(y_test, y_test_pred)
-
-    # Print performance metrics
-    print("Logistic Regression Performance:")
-    print(f"Training Confusion Matrix:\n{model_train_confusion_matrix}")
-    print(f"Training F1 Score: {model_train_f1_score:.4f}")
-    print(f"Training Recall Score: {model_train_recall_score:.4f}")
-    print(f"Training Precision Score: {model_train_precision_score:.4f}")
-    print(f"Testing Confusion Matrix:\n{model_test_confusion_matrix}")
-    print(f"Testing F1 Score: {model_test_f1_score:.4f}")
-    print(f"Testing Recall Score: {model_test_recall_score:.4f}")
-    print(f"Testing Precision Score: {model_test_precision_score:.4f}")
-    print("-" * 30)
+  
+    print("Testing Performance:")
+    print(f"Confusion Matrix:\n{confusion_matrix(y_test, y_test_pred)}")
+    print(f"F1 Score: {f1_score(y_test, y_test_pred):.4f}")
+    print(f"Recall Score: {recall_score(y_test, y_test_pred):.4f}")
+    print(f"Precision Score: {precision_score(y_test, y_test_pred):.4f}")
 
     # Evaluate using ROC-AUC
     roc_auc = roc_auc_score(y_test, best_model.predict_proba(X_test)[:, 1])
@@ -65,13 +67,21 @@ def evaluate_models(X_train, y_train, X_test, y_test):
 
     # Precision-Recall curve
     precision, recall, _ = precision_recall_curve(y_test, best_model.predict_proba(X_test)[:, 1])
-    print(f"Precision-Recall curve generated.")
+    print("Precision-Recall curve generated.")
 
 if __name__ == "__main__":
+   
     csv_path = '/home/keabetswe/Desktop/GitHub/Data Science/Supervised_Learning/Fraud-detection-System/app/data/creditcard_sampled.csv'
-    df = load_csv(csv_path)
-    X, y = prepare_data(df)
-    X_train_resampled, X_test, y_train_resampled, y_test = split_data(X, y, df)
+    df = pd.read_csv(csv_path)
+    X = df.drop(columns=['Class'])
+    y = df['Class']
 
-    # Test models and print results
-    evaluate_models(X_train_resampled, y_train_resampled, X_test, y_test)
+   
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+    # Apply SMOTE to handle class imbalance in the training set
+    sm = SMOTE(random_state=42)
+    X_train_resampled, y_train_resampled = sm.fit_resample(X_train, y_train)
+
+    # Evaluate XGBoost model with RandomizedSearchCV
+    evaluate_xgboost_with_randomsearch(X_train_resampled, y_train_resampled, X_test, y_test)
