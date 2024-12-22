@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Home_style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Fraud Detection Dashboard</h1>
+    <div id="stats">
+        <p>Total Transactions: <span id="total-transactions"></span></p>
+        <p>Fraud Transactions: <span id="fraud-transactions"></span></p>
+        <p>Non-Fraud Transactions: <span id="non-fraud-transactions"></span></p>
+    </div>
+    <div id="plot"></div>
+    <script>
+        // Fetch statistics from the backend
+        fetch('/stats')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('total-transactions').textContent = data.total_transactions;
+                document.getElementById('fraud-transactions').textContent = data.fraud_transactions;
+                document.getElementById('non-fraud-transactions').textContent = data.non_fraud_transactions;
+                
+                // Plotly example for a pie chart
+                var data = [{
+                    values: [data.fraud_transactions, data.non_fraud_transactions],
+                    labels: ['Fraud', 'Non-Fraud'],
+                    type: 'pie'
+                }];
+                Plotly.newPlot('plot', data);
+            });
+    </script>
+</body>
+</html>

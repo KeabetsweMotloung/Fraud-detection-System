@@ -6,6 +6,7 @@ from sklearn.metrics import confusion_matrix, f1_score, recall_score, precision_
 import pandas as pd
 import time
 import numpy as np
+import joblib
 
 def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
     # Define a reduced hyperparameter grid for XGBoost
@@ -68,6 +69,17 @@ def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
     # Precision-Recall curve
     precision, recall, _ = precision_recall_curve(y_test, best_model.predict_proba(X_test)[:, 1])
     print("Precision-Recall curve generated.")
+
+
+
+    # Save the model
+    # best_model = random_search.best_estimator_
+    model_path = '/home/keabetswe/Desktop/GitHub/Data Science/Supervised_Learning/Fraud-detection-System/models/Fraud_model.joblib'
+
+    joblib.dump(best_model,model_path)
+    print("Model saved as xgboost_model.pkl")
+
+
 
 if __name__ == "__main__":
    
