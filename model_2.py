@@ -39,7 +39,7 @@ def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
     # Display the time taken to process the model
     elapsed_time = end_time - start_time
    
-    print(f"Time taken for RandomizedSearchCV: {elapsed_time:.2f} seconds")
+    # print(f"Time taken for RandomizedSearchCV: {elapsed_time:.2f} seconds")
 
     # Get the best model
     best_model = random_search.best_estimator_

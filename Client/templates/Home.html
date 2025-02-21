@@ -3,35 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fraud Detection Dashboard</title>
+    <title>Fraud Detection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Home_style.css') }}">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h1>Fraud Detection Dashboard</h1>
-    <div id="stats">
-        <p>Total Transactions: <span id="total-transactions"></span></p>
-        <p>Fraud Transactions: <span id="fraud-transactions"></span></p>
-        <p>Non-Fraud Transactions: <span id="non-fraud-transactions"></span></p>
-    </div>
-    <div id="plot"></div>
-    <script>
-        // Fetch statistics from the backend
-        fetch('/stats')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('total-transactions').textContent = data.total_transactions;
-                document.getElementById('fraud-transactions').textContent = data.fraud_transactions;
-                document.getElementById('non-fraud-transactions').textContent = data.non_fraud_transactions;
-                
-                // Plotly example for a pie chart
-                var data = [{
-                    values: [data.fraud_transactions, data.non_fraud_transactions],
-                    labels: ['Fraud', 'Non-Fraud'],
-                    type: 'pie'
-                }];
-                Plotly.newPlot('plot', data);
-            });
-    </script>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/Integritech.png') }}" alt="Logo">
+        </div>
+        <ul class="navigation">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <button class="dropdown-toggle"><img src="" alt=""></button>
+        <button class="request_invite_btn">Get Started</button>
+    </header>
+
+    <main>
+        <section class="details">
+            <div class="brief_details">
+                <h1>Harnessing Data to Safeguard Your World</h1>
+                <p>In a world where every transaction counts, staying ahead of fraud has never been more critical. Our cutting-edge technology leverages the power of data to detect and prevent fraudulent activity in real-time. By using advanced algorithms and machine learning, we analyze patterns, identify risks, and provide you with the ultimate protection — all while you go about your day with peace of mind. With our app, security isn’t just a feature; it’s the foundation of your financial freedom.</p>
+                <a href ="{{ url_for('dashboard')}}"> <button class="request_invite_btn">Get Started</button></a>
+            </div>
+            <div class="mockup">
+                <img src="{{ url_for('static', filename='images/mockup.png') }}" alt="" class="mockup-img">
+            </div>
+        </section>
+
+        <section class="reason">
+            <div class="benefits">
+                <h1>Why choose IntegriTech?</h1>
+                <p>At Integritech, we believe in more than just securing transactions — we’re committed to creating a seamless, worry-free experience for our users. With advanced fraud detection algorithms, real-time alerts, and continuous improvements driven by machine learning, we ensure that your financial activities are protected around the clock. Our solution is designed for efficiency, simplicity, and trust, empowering you to focus on what matters most while we handle the security. Choose Integritech, because your peace of mind is our top priority.</p>
+            </div>
+        
+
+        <div class="why_list">
+            <div class="why_item">
+                <img src="{{ url_for('static', filename='images/handshake.jpeg') }}" alt="">
+                <h2>Seamless Integration with Existing Systems</h2>
+                <p>Our platform easily integrates with your current infrastructure, ensuring minimal disruption while enhancing security.</p>
+            </div>
+
+            <div class="why_item">
+                <img src="{{ url_for('static', filename='images/handshake.jpeg') }}" alt="">
+                <h2>Scalable Solution for Growing Businesses</h2>
+                <p>Whether you're a small startup or an established company, Integritech scales with your business to provide robust protection as you grow.</p>
+            </div>
+
+            <div class="why_item">
+                <img src="{{ url_for('static', filename='images/handshake.jpeg') }}" alt="">
+                <h2>Quick Alerts for Suspicious Activity</h2>
+                <p>Stay updated with instant alerts for any unusual activity, ensuring you can act fast to protect your finances.</p>
+            </div>
+
+            <div class="why_item">
+                <img src="{{ url_for('static', filename='images/handshake.jpeg') }}" alt="">
+                <h2>Cost-Effective Fraud Prevention</h2>
+                <p>Protect your business from financial losses due to fraud without breaking the bank. Integritech provides affordable, top-tier fraud detection solutions.</p>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer>
+        <div class="ft-one">
+            <div class="social_link">
+                <img src="{{ url_for('static', filename='images/Integritech.png') }}" alt="Logo">
+
+                <ul class="social_link_list">
+                    <li><a href="#facebook"><img src="{{ url_for('static', filename='images/facebook.png') }}" alt="facebook_logo"></a></li>
+                    <li><a href="#youtube"><img src="{{ url_for('static', filename='images/youtube.png') }}" alt="youtube_logo"></a></li>
+                    <li><a href="#twitter"><img src="{{ url_for('static', filename='images/twitter.png') }}" alt="twitter_logo"></a></li>
+                    <li><a href="#instagram"><img src="{{ url_for('static', filename='images/instagram.png') }}" alt="instagram_logo"></a></li>            
+                </ul>
+
+            </div>
+
+            <ul class="ft-nav-1">
+                <li><a href="#about_us">About us</a></li>
+                <li><a href="#contact_us">Contact Us</a></li>
+                <li><a href="#support">Support Us</a></li>
+                <li><a href="#privacy policy">Privacy Policy</a></li>
+            </ul>
+            </div>
+       
+
+        <div class="ft-two">
+            <h2>IntegriTech. All Rights Reserved</h2>
+            
+        </div>
+        </div>
+
+
+
+    </footer>
+
+    
 </body>
 </html>

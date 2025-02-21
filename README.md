@@ -48,7 +48,8 @@ To run this project locally, follow these steps:
 
 3. Run the application:
     ```bash
-    python app.py
+    Head to the Server Directory and run "python server.py"
+    
     ```
 
 **Note**: Ensure you are using Python 3.x and have all necessary system dependencies installed.
