@@ -128,14 +128,13 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Cost Savings Estimate</h3>
-                            <h1>R17,000</h1>
+                            <h1 id="cost-savings">R17,000</h1>
                         </div>
                         <div class="progress">
-                            <div class="outer">
-                                <div class="inner"></div>
-                               
-                            </div>
-                
+                            <svg width="120" height="120">
+                                <circle class="bg-circle" cx="60" cy="60" r="50"></circle>
+                                <circle class="progress-circle" cx="60" cy="60" r="50"></circle>
+                            </svg>
                             
                         </div>
                     </div>
@@ -163,4 +162,18 @@
         </main>
     </div>
 </body>
+
+function setProgress(percent) {
+    const circle = document.querySelector('.progress-circle');
+    const circumference = 314; // Full circle length (2 * π * r)
+
+    const offset = circumference - (percent / 100) * circumference;
+    circle.style.strokeDashoffset = offset;
+}
+
+// Example: Fill to 80%
+setProgress(80);
+
 </html>
+
+

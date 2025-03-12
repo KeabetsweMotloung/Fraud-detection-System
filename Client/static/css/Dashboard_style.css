@@ -309,6 +309,9 @@ main .insights .progress{
    height: 7rem;
  }
 
+
+
+
  main .insights svg circle{
    fill: none;
    stroke: var(--color-primary);
@@ -372,7 +375,7 @@ main .insights .roc_auc_score svg circle {
    stroke-dashoffset: 120; 
 }
 
-/* main .insights .cost_savings_estimate circle {
+main .insights .cost_savings_estimate circle {
     fill: none;
    stroke: var(--color-primary);
    stroke-width: 14;
@@ -380,42 +383,27 @@ main .insights .roc_auc_score svg circle {
    transform: translate(5px,5px);
    stroke-dasharray: 110; 
    stroke-dashoffset: 120; 
-} */
-
-
-.cost_savings_estimate .progress {
-
-    /* position: relative;  */
-    width: 6rem;
-    height: 6rem;
 }
 
-.cost_savings_estimate .progress .outer {
-    width: 7rem;
-    height: 7rem;
-    /* padding: 5px; */
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 6px 6px 10px -1px rgba(132,139,200,0.15),
-    6px 6px 10px -1px rgba(225,225,255,0.7);
+/* Adding the dynamic side to the circle */
+.progress svg {
+    transform: rotate(-90deg); /* Start progress from top */
 }
 
-.cost_savings_estimate .progress .inner {
-    width: 5rem;
-    height: 5rem;
-    box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),inset 
-    -4px -4px 6px -1px rgba(225,225,255,0.7),
-    -0.5px -0.5px 0px rgba(225,225,255,1),
-    0.5px -0.5px 0px rgba(0,0, 0,0.15),
-    0px 12px 10px -10px rgba(0, 0,0, 0.05)
-    ;
-    border-radius: 50%;
-    
+.bg-circle {
+    fill: none;
+    stroke: #e0e0e0;
+    stroke-width: 10;
 }
 
-
+.progress-circle {
+    fill: none;
+    stroke: #41f1b6;
+    stroke-width: 10;
+    stroke-dasharray: 314; /* Circumference of the circle (2 * π * r) */
+    stroke-dashoffset: 314; /* Start fully empty */
+    transition: stroke-dashoffset 1s ease;
+}
 
 
 
