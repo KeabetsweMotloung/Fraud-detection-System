@@ -19,17 +19,17 @@ body {
     overflow: scroll;
     width: 100vw;
     font-family: 'Public Sans', sans-serif;
-    background-color: var(--darkest-black); /* Dark Black */
-    color: var(--white); /* White for text */
+    background-color: var(--darkest-black);
+    color: var(--white); 
 }
 
 a {
     text-decoration: none;
-    color: var(--bright-teal); /* Bright Teal for links */
+    color: var(--bright-teal); 
 }
 
 .logo img {
-    width: 100px; /* Adjust as needed */
+    width: 100px; 
     height: auto;
     margin-right: 10px;
 }
@@ -40,7 +40,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: var(--darkest-black); /* White */
+    background-color: var(--darkest-black);
     position: absolute;
     z-index: 2;
     width: 100vw;
@@ -60,7 +60,7 @@ header {
 .navigation li a {
     position: relative;
     margin-left: 20px;
-    color: var(--light-grayish-blue); /* Darkest Black */
+    color: var(--light-grayish-blue); 
 }
 
 .navigation li a::after {
@@ -71,7 +71,7 @@ header {
     bottom: -35px;
     width: 100%;
     height: 4px;
-    background: var(--white); /* Darkest Black */
+    background: var(--white);
     transition: all 0.5s;
    
 }
@@ -85,11 +85,11 @@ header {
 }
 
 span, p {
-    color: var(--light-grayish-blue); /* Light Grayish Blue */
+    color: var(--light-grayish-blue); 
 }
 
 .details {
-    background-color: var(--dark-blue); /* Dark Blue */
+    background-color: var(--dark-blue); 
     display: grid;
     grid-template-columns: 40% 60%;
     height: 130vh;
@@ -113,7 +113,7 @@ span, p {
     all: unset;
     width: 7em;
     background: linear-gradient(to right, var(--bright-teal), var(--dark-blue)); /* Teal to Dark Blue gradient */
-    color: var(--white); /* White */
+    color: var(--white); 
     border: none;
     padding: 10px 40px;
     cursor: pointer;
@@ -136,8 +136,8 @@ span, p {
 /* Reason section styles */
 .reason {
     /* background-color: var(--light-gray);  */
-    padding: 60px 50px; /* Added more padding */
-    background-color: var(--dark-blue); /* Dark Blue text */
+    padding: 60px 50px; 
+    background-color: var(--dark-blue); 
     transition: background-color 0.5s ease; /* Smooth transition */
 }
 
@@ -167,7 +167,7 @@ span, p {
 }
 
 .benefits p {
-    color: var(--white); /* Light Grayish Blue */
+    color: var(--white); 
 }
 
 /* Why List Styles */
@@ -185,21 +185,21 @@ span, p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--white); /* White */
+    background-color: var(--white); 
     padding: 20px;
     margin: 20px;
-    width: 300px; /* Adjust as needed */
+    width: 300px; 
     border-radius: 10px; /* Rounded corners */
 }
 
 .why_item img {
-    width: 100px; /* Adjust as needed */
+    width: 100px; 
     height: auto;
     margin-bottom: 15px;
 }
 
 .why_item h2 {
-    font-size: 22px; /* Adjust as needed */
+    font-size: 22px;
     margin-bottom: 10px;
     text-align: center;
     color: var(--darkest-black);
@@ -211,7 +211,7 @@ span, p {
 }
 
 .social_link img {
-    width: 100px; /* Adjust as needed */
+    width: 100px; 
     height: auto;
     margin-right: 10px;
 }
@@ -220,12 +220,12 @@ span, p {
     list-style: none;
     padding: 0;
     display: flex;
-    gap: 10px; /* Adjust the gap as needed */
+    gap: 10px; 
 }
 
 .social_link_list img {
-    width: 30px; /* Adjust as needed for coin size */
-    height: 30px; /* Adjust as needed for coin size */
+    width: 30px;
+    height: 30px; 
 }
 
 .social_link_list li {
@@ -233,7 +233,7 @@ span, p {
 }
 
 footer {
-    background-color: var(--darkest-black); /* Dark Blue */
+    background-color: var(--darkest-black); 
     display: flex;
     justify-content: space-between;
     padding: 10px 50px;
@@ -270,7 +270,7 @@ footer ul {
 }
 
 .ft-nav li .ft-nav-2 li a {
-    color: var(--white); /* Light Grayish Blue */
+    color: var(--white); 
     font-size: 20px;
 }
 
@@ -308,7 +308,7 @@ footer ul {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        background: var(--white); /* White */
+        background: var(--white); 
         width: 100%;
         padding: 20px;
         margin-top: 20px; /* Add margin to create space between header and navigation */
@@ -323,7 +323,7 @@ footer ul {
     }
 
     header .navigation li a {
-        color: var(--dark-blue); /* Dark Blue */
+        color: var(--dark-blue); 
         font-weight: 900;
         font-size: 20px;
     }
@@ -350,8 +350,8 @@ footer ul {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        background: var(--dark-blue); /* Dark Blue */
-        padding-top: 450px; /* Add padding to push content down */
+        background: var(--dark-blue); 
+        padding-top: 450px; 
     }
 
     .brief_details {
@@ -362,7 +362,7 @@ footer ul {
         justify-content: center;
         align-items: center;
         text-align: center;
-        flex-direction: column; /* Ensure vertical alignment of text */
+        flex-direction: column;
     }
 
     .brief_details h1 {
