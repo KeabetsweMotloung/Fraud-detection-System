@@ -8,29 +8,30 @@ from flask_cors import CORS
 from sklearn.model_selection import train_test_split
 from threading import Thread
 from imblearn.over_sampling import SMOTE
-# scripts_path = '/home/keabetswe/Desktop/GitHub/Data Science/Supervised_Learning/Fraud-detection-System/scripts'
-# if scripts_path not in sys.path:
-#     sys.path.append(scripts_path)
 
-
-# from model_evaluation import evaluate_xgboost_with_randomsearch 
 
 # Determine the absolute paths to template and static folders
 current_dir = os.path.dirname(os.path.abspath(__file__))
-template_dir = os.path.join(current_dir, '../Client/templates')
-static_dir = os.path.join(current_dir, '../Client/static')
-# static_dir = os.path.join(current_dir, '../Client/frontend/build')
+template_dir = os.path.join(current_dir, '..','Client','templates')
+static_dir = os.path.join(current_dir, '..','Client','static')
 
 
 
-app = Flask(__name__, static_folder='../Client/static', template_folder='../Client/templates')
-# app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
+
+
+app = Flask(__name__,static_folder=static_dir, template_folder=template_dir)
 CORS(app)
 
 # Load the saved model at startup
-model_path = "/home/keabetswe/Desktop/GitHub/Data Science/Supervised_Learning/Fraud-detection-System/models/Fraud_model.joblib"
-model = joblib.load(model_path)
+model_path = os.path.join(current_dir,'..', 'models', 'Fraud_model.joblib')
 
+# Check if the model file exists before loading it
+if os.path.exists(model_path):
+    model = joblib.load(model_path)
+    print(f"Model loaded from {model_path}")
+else:
+    print(f"Model file not found at: {model_path}")
+    sys.exit(1)  
 
 
 

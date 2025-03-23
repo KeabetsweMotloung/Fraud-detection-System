@@ -1,8 +1,12 @@
-import Flask
-import pandas
-import joblib
-import json
-import CORS
+pip install flask
+pip install xgboost
+pip install scikit-learn
+pip install imbalanced-learn
+pip install pandas
+pip install numpy
+pip install joblib
+pip install json
+pip install flask-cors
 
 
 # How to run the server

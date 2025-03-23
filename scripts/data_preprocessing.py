@@ -1,8 +1,9 @@
 import pandas as pd
+import os
 from imblearn.under_sampling import NearMiss
 from sklearn.model_selection import train_test_split
 
-csv_path = '//home/keabetswe/Desktop/GitHub/Data Science/Supervised_Learning/Fraud-detection-System/app/data/creditcard_sampled.csv'
+csv_path = os.path.join("app","data","creditcard_sampled.csv")
 
 
 def load_csv(csv_path):
@@ -23,7 +24,7 @@ def split_data(X, y, df):
     nearmiss = NearMiss(sampling_strategy=1.0)  # 1.0 means balance to a 50/50 ratio
     X_train_resampled, y_train_resampled = nearmiss.fit_resample(X_train, y_train)
 
-    # Print the value counts of the resampled training data (balanced)
+
     print("Resampled training data class distribution:")
     print(y_train_resampled.value_counts())
 

@@ -7,6 +7,7 @@ import pandas as pd
 import time
 import numpy as np
 import joblib
+import os
 
 def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
     # Define a reduced hyperparameter grid for XGBoost
@@ -36,7 +37,7 @@ def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
     end_time = time.time()
     
 
-    # Display the time taken to process the model
+
     elapsed_time = end_time - start_time
    
     print(f"Time taken for RandomizedSearchCV: {elapsed_time:.2f} seconds")
@@ -76,17 +77,16 @@ def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
 
 
     # Save the model
-    # best_model = random_search.best_estimator_
-    model_path = '/home/keabetswe/Desktop/GitHub/Data Science/Supervised_Learning/Fraud-detection-System/models/Fraud_model.joblib'
+    model_path = os.path.join('models','Fraud_model.joblib')
 
     joblib.dump(best_model,model_path)
-    print("Model saved as xgboost_model.pkl")
+    print(f"Model saved as xgboost_model.pkl at: {model_path}")
 
 
 
 if __name__ == "__main__":
    
-    csv_path = '/home/keabetswe/Desktop/GitHub/Data Science/Supervised_Learning/Fraud-detection-System/app/data/creditcard_sampled.csv'
+    csv_path = os.path.join('app','data','creditcard_sampled.csv')
     df = pd.read_csv(csv_path)
     X = df.drop(columns=['Class'])
     y = df['Class']
