@@ -163,16 +163,6 @@
     </div>
 </body>
 
-function setProgress(percent) {
-    const circle = document.querySelector('.progress-circle');
-    const circumference = 314; // Full circle length (2 * π * r)
-
-    const offset = circumference - (percent / 100) * circumference;
-    circle.style.strokeDashoffset = offset;
-}
-
-// Example: Fill to 80%
-setProgress(80);
 
 </html>
 

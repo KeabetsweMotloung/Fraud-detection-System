@@ -10,12 +10,9 @@ from threading import Thread
 from imblearn.over_sampling import SMOTE
 
 
-# Determine the absolute paths to template and static folders
 current_dir = os.path.dirname(os.path.abspath(__file__))
 template_dir = os.path.join(current_dir, '..','Client','templates')
 static_dir = os.path.join(current_dir, '..','Client','static')
-
-
 
 
 
@@ -51,11 +48,7 @@ def predict():
     try:
         # Load the model only when needed
         model = joblib.load(model_path)
-
-        # Get JSON data from request
         data = request.get_json()
-
-        # Convert JSON to DataFrame
         df = pd.DataFrame([data])
 
         # Ensure input matches model's expected features
