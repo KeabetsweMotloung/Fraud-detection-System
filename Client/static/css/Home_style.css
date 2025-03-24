@@ -41,20 +41,35 @@ header {
     align-items: center;
     padding: 10px 20px;
     background-color: var(--darkest-black);
-    position: absolute;
-    z-index: 2;
-    width: 100vw;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: auto;
+    min-height: 80px;
+    box-sizing: border-box;
+    border: 2px solid red;
 }
+
+main{
+    margin-top: 80px;
+    border: 2px solid blue;
+}
+
 
 .navigation{
     align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-grow: 1;
 }
 
 .navigation li {
-    align-items: center;
     list-style-type: none;
     display: inline-block;
-    gap: 15px;
+   
 }
 
 .navigation li a {
@@ -97,14 +112,14 @@ span, p {
     align-items: center;
     position: relative;
     overflow-x: hidden;
-    padding-top: 200px;
+    padding-top: 0;
 }
 
 .brief_details {
     display: flex;
     flex-direction: column;
     width: 70%;
-    transform: translate(40%, -40%);
+    transform: translate(40%);
 }
 
 .request_invite_btn {
@@ -133,9 +148,8 @@ span, p {
     transform: translate(140px, -80px);
 }
 
-/* Reason section styles */
+/* REASON SECTION STYLES */
 .reason {
-    /* background-color: var(--light-gray);  */
     padding: 60px 50px; 
     background-color: var(--dark-blue); 
     transition: background-color 0.5s ease; /* Smooth transition */
@@ -170,7 +184,7 @@ span, p {
     color: var(--white); 
 }
 
-/* Why List Styles */
+/* WHY LIST STYLES */
 .why_list {
     display: flex;
     flex-wrap: wrap;
@@ -189,7 +203,7 @@ span, p {
     padding: 20px;
     margin: 20px;
     width: 300px; 
-    border-radius: 10px; /* Rounded corners */
+    border-radius: 10px;
 }
 
 .why_item img {
@@ -293,110 +307,117 @@ footer ul {
 }
 
 .ft-two h4 {
-    color: var(--white); /* Light Grayish Blue */
+    color: var(--white); 
 }
 
 @media screen and (max-width: 765px) {
+    
     header {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        min-height: 3.5rem; 
+        width: 100%;
+        background-color: var(--darkest-black);
     }
-
+    header .logo img {
+        width: 3.5rem; 
+    }
     .navigation {
-        position: static;
+
+        width: 100%;
         display: flex;
         justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background: var(--white); 
-        width: 100%;
-        padding: 20px;
-        margin-top: 20px; /* Add margin to create space between header and navigation */
-        border-radius: 10px;
-        text-align: center;
-        opacity: 1;
-        transition: all .5s ease-in-out;
+        padding: 0.5rem 0;
+        gap: 0.5rem;
     }
-
-    header .navigation li {
-        margin: 10px 0;
-    }
-
-    header .navigation li a {
-        color: var(--dark-blue); 
-        font-weight: 900;
-        font-size: 20px;
-    }
-
-    .navigation li a {
+    .navigation li {
         margin: 0;
     }
-
-    .navigation li a::after {
-        bottom: -20px;
+    .navigation li a {
+        font-size: 0.9rem;
     }
-
-    header .request_invite_btn {
-        display: none;
-    }
-
-    .dropdown-toggle {
-        display: block;
-    }
-
-    .details {
-        all: unset;
+    
+    /* MAIN MEDIA */
+    main {
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
-        background: var(--dark-blue); 
-        padding-top: 450px; 
-    }
-
-    .brief_details {
+        align-items: center;
+        padding: 1rem;
+        margin-top: calc(3.5rem + 1rem);
         width: 100%;
-        transform: translate(0);
-        padding: 0 40px;
+    }
+    
+    footer {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
         flex-direction: column;
-    }
-
-    .brief_details h1 {
-        width: 95%;
-    }
-
-    .brief_details span {
-        font-size: 20px;
-    }
-
-    .mockup {
-        background-size: 100%;
-        background-position-x: 120px;
-        background-position-y: 30px;
-    }
-
-    .mockup-img {
+        align-items: center;
+        padding: 0.75rem 1rem;
         width: 100%;
-        transform: translate(0, 0);
+        background-color: var(--darkest-black);
+        color: var(--white);
     }
-
-    .reason {
-        padding: 40px;
-        width: 100vw;
-    }
-
-    .reason div {
-        width: 93;
-        margin: auto;
+    .ft-one, .ft-two {
+        width: 100%;
+        margin: 1rem 0;
         text-align: center;
     }
-
-    .why_item {
-        width: 100%;
-        margin: 10px 0;
+    .ft-one ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        margin: 0.5rem 0;
+        margin-top: 1rem; 
+        margin-bottom: 0.5rem;
+        padding: 0;
+        list-style: none;
+    }
+    .ft-nav-1 li {
+        margin: 0.25rem 0;
+    }
+    .social_link_list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.75rem;
+        margin: 0.5rem 0;
     }
 }
+
+
+/* upload container */
+
+
+.upload-container {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+}
+
+.file-dropdown, .file-input, .upload-button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.upload-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    background-color: #0056b3;
+}
+
+

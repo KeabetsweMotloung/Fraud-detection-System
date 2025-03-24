@@ -18,7 +18,7 @@
             <li><a href="#">Contact</a></li>
         </ul>
         <button class="dropdown-toggle"><img src="" alt=""></button>
-        <button class="request_invite_btn">Get Started</button>
+        
     </header>
 
     <main>
@@ -27,6 +27,21 @@
                 <h1>Harnessing Data to Safeguard Your World</h1>
                 <p>In a world where every transaction counts, staying ahead of fraud has never been more critical. Our cutting-edge technology leverages the power of data to detect and prevent fraudulent activity in real-time. By using advanced algorithms and machine learning, we analyze patterns, identify risks, and provide you with the ultimate protection — all while you go about your day with peace of mind. With our app, security isn’t just a feature; it’s the foundation of your financial freedom.</p>
                 <a href ="{{ url_for('dashboard')}}"> <button class="request_invite_btn">Get Started</button></a>
+
+                <div class="upload-container">
+                    <label for="file-dropdown">Select a file:</label>
+                    <select id="file-dropdown" class="file-dropdown">
+                        <option value="">-- Choose an uploaded file --</option>
+                        <option value="sample1.csv">sample1.csv</option>
+                        <option value="sample2.csv">sample2.csv</option>
+                    </select>
+                    
+                    <p>or upload a new file:</p>
+                    <input type="file" id="file-input" class="file-input" accept=".csv">
+                    
+                    <button class="upload-button">Upload</button>
+                </div>
+
             </div>
             <div class="mockup">
                 <img src="{{ url_for('static', filename='images/mockup.png') }}" alt="" class="mockup-img">
@@ -104,3 +119,20 @@
     
 </body>
 </html>
+
+<script>
+window.onload = function () {
+    let header = document.querySelector("header"); 
+    let mainContent = document.querySelector("main");
+
+    function adjustMargin() {
+        let headerHeight = header.getBoundingClientRect().height; 
+        mainContent.style.marginTop = `${headerHeight}px`;
+    }
+
+    adjustMargin(); 
+    window.addEventListener("resize", adjustMargin);
+};
+
+
+</script>
