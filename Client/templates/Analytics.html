@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Analytics_style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/Integritech.png') }}" alt="Logo">
+                    <h2>Integri <span class="danger">Tech</span></h2>
+                </div>
+                <div class="close" id="close_btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="#" class="active">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <div class ="Title">
+                        <h3>Dashboard</h3>
+                    </div>
+                </a>
+                <a href="#" class="active">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Analytics</h3>
+                </a>
+                <a href ="{{ url_for('home')}}" class="active">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Home page</h3>
+                </a>
+                <a href="#" class="active">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Log out</h3>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main section -->
+        <main>
+            <h1>Fraud Detection Analytics</h1>
+        <div class="container">
+            <div class="header">
+                
+            </div>
+
+            <div class="KPI">
+                <div class="card">
+                    <h3>Total Transactions</h3>
+                    <p>134,590</p>
+                </div>
+
+                <div class="card">
+                    <h3>Fraudulent Transactions</h3>
+                    <p>134,590</p>
+                </div>
+
+                <div class="card">
+                    <h3>Detection Rate (Recall)</h3>
+                    <p>134,590</p>
+                </div>
+
+
+                <div class="card">
+                    <h3>False Positive Rate</h3>
+                    <p>134,590</p>
+                </div>
+
+            </div>
+
+            <div class="charts">
+
+            </div>
+
+        </div>
+
+            
+        </main>
+    </div>
+
+
+    
+
+      
+        
+</body>
+
+
+</html>
+
+
+  
+
+

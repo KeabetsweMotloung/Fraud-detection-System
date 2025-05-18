@@ -30,6 +30,11 @@ else:
     print(f"Model file not found at: {model_path}")
     sys.exit(1)  
 
+Upload = 'uploads'
+if not os.path.exists(Upload):
+    os.makedirs(Upload)
+
+app.config['UPLOAD'] = Upload
 
 
 # ROUTING
@@ -37,6 +42,9 @@ else:
 def home():
     return render_template('Home.html')
 
+@app.route('/analytics')
+def analytics():
+    return render_template('Analytics.html')
 
 @app.route('/dashboard')
 def dashboard():
@@ -66,7 +74,29 @@ def predict():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+    
 
+@app.route('/start-pipeline',methods=['POST'])
+def start_pipeline():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}),400
+    
+    file = request.files['file']
+  
+
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}),400
+
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    file.save(file_path)
+
+     # Simulating the pipeline process
+    try:
+        print(f"Processing file: {file_path}")
+        # Replace this with your actual pipeline code
+        return jsonify({'message': f'Pipeline started successfully with file {file.filename}'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 if __name__ == "__main__":

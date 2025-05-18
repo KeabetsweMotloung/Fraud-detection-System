@@ -10,14 +10,12 @@ import joblib
 import os
 
 def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
-    # Define a reduced hyperparameter grid for XGBoost
     param_grid = {
         'xgb__n_estimators': [100, 200, 300],
         'xgb__max_depth': [6, 10, 15],
         'xgb__learning_rate': [0.01, 0.1, 0.2],
         'xgb__subsample': [0.8, 1.0],
         'xgb__colsample_bytree': [0.8, 1.0],
-        # Handle class imbalance
         'xgb__scale_pos_weight': [1, y_train.value_counts()[0] / y_train.value_counts()[1]] 
     }
 
@@ -66,13 +64,9 @@ def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
     print(f"Recall Score: {recall_score(y_test, y_test_pred):.4f}")
     print(f"Precision Score: {precision_score(y_test, y_test_pred):.4f}")
 
-    # Evaluate using ROC-AUC
+   
     roc_auc = roc_auc_score(y_test, best_model.predict_proba(X_test)[:, 1])
     print(f'ROC-AUC: {roc_auc:.4f}')
-
-    # Precision-Recall curve
-    precision, recall, _ = precision_recall_curve(y_test, best_model.predict_proba(X_test)[:, 1])
-    print("Precision-Recall curve generated.")
 
 
 

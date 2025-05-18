@@ -32,9 +32,14 @@
                     <label for="file-dropdown">Select a file:</label>
                     <select id="file-dropdown" class="file-dropdown">
                         <option value="">-- Choose an uploaded file --</option>
-                        <option value="sample1.csv">sample1.csv</option>
-                        <option value="sample2.csv">sample2.csv</option>
+                        <option value="file">credit_card_fraud_synthetic_1000.csv</option>
                     </select>
+
+                    <input type="file" id="file-input" style="display: none;"/>
+
+                    <button id="start-pipeline" onclick="startPipeline()">Start Pipeline</button>
+
+                    <div id="status"></div>
                     
                     <p>or upload a new file:</p>
                     <input type="file" id="file-input" class="file-input" accept=".csv">
@@ -121,6 +126,7 @@
 </html>
 
 <script>
+    // SCRIPT FOR SCREEN SIZING
 window.onload = function () {
     let header = document.querySelector("header"); 
     let mainContent = document.querySelector("main");
@@ -133,6 +139,38 @@ window.onload = function () {
     adjustMargin(); 
     window.addEventListener("resize", adjustMargin);
 };
+
+
+// START PIPELINE PROCESS
+
+        document.getElementById('fileInput').style.display = 'block';
+
+        function startPipeline() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a file!');
+                return;
+            }
+
+            // Now trigger the pipeline - in this case, sending the file to backend or starting the process
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Example of sending to a backend endpoint using fetch
+            fetch('/start-pipeline', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('status').innerText = `Pipeline started successfully!`;
+            })
+            .catch(error => {
+                document.getElementById('status').innerText = `Error starting pipeline: ${error}`;
+            });
+        }
 
 
 </script>

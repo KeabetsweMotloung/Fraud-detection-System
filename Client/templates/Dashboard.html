@@ -22,15 +22,17 @@
             </div>
 
             <div class="sidebar">
-                <a href="#" class="active">
+                <a href="{{ url_for('dashboard')}}" class="active">
                     <span class="material-icons-sharp">grid_view</span>
-                    <h3>Dashboard</h3>
+                    <div class ="Title">
+                        <h3>Dashboard</h3>
+                    </div>
                 </a>
-                <a href="#" class="active">
+                <a href="{{ url_for('analytics')}}" class="active">
                     <span class="material-icons-sharp">grid_view</span>
-                    <h3>Settings</h3>
+                    <h3>Analytics</h3>
                 </a>
-                <a href="#" class="active">
+                <a href ="{{ url_for('home')}}" class="active">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Home page</h3>
                 </a>
@@ -45,9 +47,6 @@
         <main>
             <h1>Dashboard</h1>
 
-            <div class="date">
-                <input type="date">
-            </div>
 
             <div class="insights">
                 <!-- Algorithm Time -->
@@ -58,12 +57,13 @@
                             <h3>Algorithm Time</h3>
                             <h1>3 min 42 sec</h1>
                         </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36" stroke-width="6" fill="none"></circle>
+                        <div class="progress" data-percentage="85">
+                            <svg width="92" height="92" class="rotated">
+                              <circle cx="46" cy="46" r="45" class="bg-circle"/>
+                              <circle cx="46" cy="46" r="45" class="progress-circle"/>
                             </svg>
-                           
-                        </div>
+                          </div>
+                          
                     </div>
                     <small class="text-muted">Last Execution: 222.39 sec</small>
                 </div>
@@ -76,12 +76,14 @@
                             <h3>Fraud Detection Rate (%)</h3>
                             <h1>87.18%</h1>
                         </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36" stroke-width="6" fill="none"></circle>
+                        <div class="progress" data-percentage="87.18">
+                            <svg width="92" height="92" class="rotated">
+                              <circle cx="46" cy="46" r="45" class="bg-circle"/>
+                              <circle cx="46" cy="46" r="45" class="progress-circle"/>
                             </svg>
+                          </div>
+                          
                         
-                        </div>
                     </div>
                     <small class="text-muted">Last Execution: 87.18%</small>
                 </div>
@@ -94,12 +96,13 @@
                             <h3>False Positive Rate (FPR)</h3>
                             <h1>0.035%</h1>
                         </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36" stroke-width="6" fill="none"></circle>
+                        <div class="progress" data-percentage="0.335">
+                            <svg width="92" height="92" class="rotated">
+                              <circle cx="46" cy="46" r="45" class="bg-circle"/>
+                              <circle cx="46" cy="46" r="45" class="progress-circle"/>
                             </svg>
-                            
-                        </div>
+                          </div>
+                          
                     </div>
                     <small class="text-muted">Last Execution: 0.035%</small>
                 </div>
@@ -112,12 +115,13 @@
                             <h3>False Negative Rate (FNR)</h3>
                             <h1>12.82%</h1>
                         </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36" stroke-width="6" fill="none"></circle>
+                        <div class="progress" data-percentage="12.82">
+                            <svg width="92" height="92" class="rotated">
+                              <circle cx="46" cy="46" r="45" class="bg-circle"/>
+                              <circle cx="46" cy="46" r="45" class="progress-circle"/>
                             </svg>
-                            
-                        </div>
+                          </div>
+                          
                     </div>
                     <small class="text-muted">Last Execution: 12.82%</small>
                 </div>
@@ -130,13 +134,13 @@
                             <h3>Cost Savings Estimate</h3>
                             <h1 id="cost-savings">R17,000</h1>
                         </div>
-                        <div class="progress">
-                            <svg width="120" height="120">
-                                <circle class="bg-circle" cx="60" cy="60" r="50"></circle>
-                                <circle class="progress-circle" cx="60" cy="60" r="50"></circle>
+                        <div class="progress" data-percentage="35">
+                            <svg width="92" height="92" class="rotated">
+                              <circle cx="46" cy="46" r="45" class="bg-circle"/>
+                              <circle cx="46" cy="46" r="45" class="progress-circle"/>
                             </svg>
-                            
-                        </div>
+                          </div>
+                          
                     </div>
                     <small class="text-muted">Last Execution: R17,000</small>
                 </div>
@@ -149,21 +153,52 @@
                             <h3>ROC-AUC Score</h3>
                             <h1>0.9850</h1>
                         </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36" stroke-width="6" fill="none"></circle>
+                        <div class="progress" data-percentage="0.9850">
+                            <svg width="92" height="92" class="rotated">
+                              <circle cx="46" cy="46" r="45" class="bg-circle"/>
+                              <circle cx="46" cy="46" r="45" class="progress-circle"/>
                             </svg>
-                            
-                        </div>
+                          </div>
+                          
                     </div>
                     <small class="text-muted">Last Execution: 0.9850</small>
                 </div>
             </div>
         </main>
     </div>
+
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('.progress').forEach(progress => {
+            const circle = progress.querySelector('.progress-circle');
+            const pct    = parseFloat(progress.dataset.percentage);
+            if (!circle || isNaN(pct)) return;
+      
+            // 1) circumference
+            const r = circle.r.baseVal.value;
+            const c = 2 * Math.PI * r;
+      
+            // 2) start empty
+            circle.style.strokeDasharray  = c;
+            circle.style.strokeDashoffset = c;
+      
+            // 3) next frame → animate to target
+            requestAnimationFrame(() => {
+              circle.style.strokeDashoffset = c - (pct/100) * c;
+            });
+          });
+        });
+      </script>
+      
+        
 </body>
 
 
 </html>
+
+
+  
 
 

@@ -1,13 +1,9 @@
-pip install flask
-pip install xgboost
-pip install scikit-learn
-pip install imbalanced-learn
-pip install pandas
-pip install numpy
-pip install joblib
-pip install json
-pip install flask-cors
+Flask==3.1.0
+flask-cors==5.0.1
+imbalanced-learn==0.13.0
+joblib==1.4.2
+numpy==2.2.3
+pandas==2.2.3
+scikit-learn==1.6.1
+xgboost==2.1.4
 
-
-# How to run the server
-Navigate to the Server folder and run this command 'python3 server.py'

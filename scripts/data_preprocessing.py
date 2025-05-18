@@ -10,18 +10,17 @@ def load_csv(csv_path):
     df = pd.read_csv(csv_path) 
     return df
 
-# Prepare data by splitting into features (X) and target (y)
 def prepare_data(df):
     X = df.drop(['Class'], axis=1)  
     y = df['Class']  
     return X, y
 
-# Split data into training and test sets, then apply NearMiss to balance the classes
+
 def split_data(X, y, df):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     # Create a 50/50 sub-dataframe ratio of "Fraud" and "Non-Fraud" transactions (NearMiss Algorithm)
-    nearmiss = NearMiss(sampling_strategy=1.0)  # 1.0 means balance to a 50/50 ratio
+    nearmiss = NearMiss(sampling_strategy=1.0)  
     X_train_resampled, y_train_resampled = nearmiss.fit_resample(X_train, y_train)
 
 

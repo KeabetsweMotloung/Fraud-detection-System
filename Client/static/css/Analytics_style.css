@@ -64,9 +64,10 @@ html{
     height: 100%;
 }
 
+
 .container {
     display: flex;
-    min-height: 100vh;    
+    min-height: 100vh;   
     width: 96%;
     margin: 0 auto;
     gap: 1.8rem;
@@ -143,7 +144,7 @@ b{
 }
 
 aside {
-    flex: 0 0 14rem;    
+    flex: 0 0 14rem;      /* lock width */
     display: flex;
     flex-direction: column;
     background: var(--dark-blue);
@@ -176,7 +177,7 @@ aside .logo img{
 aside .logo h2 {
     margin: 0;
     font-size: 1.2rem;
-    color: var(--color-background);   
+    color: var(--color-background);     /* make sure it’s visible on white */
   }
 
 aside .close{
@@ -259,115 +260,20 @@ aside .sidebar a:hover span{
 
 
 main {
-    flex: 1;              
+    flex: 1;            
     display: flex;
     flex-direction: column;
     background: var(--color-background);
   }
   
   
-main > h1 {
-margin: 0 0 1rem;
-padding: 1rem 2rem;
-background: var(--dark-blue);
-color: white;
-width: 100%;
-box-sizing: border-box;
-}
-
-
-/* grey “track” circle */
-.bg-circle {
-    fill: none;
-    stroke: #e6e6e6;
-    stroke-width: 10;
-  }
   
-  /* green “progress” circle */
-  .progress-circle {
-    fill: none;
-    stroke: #00bfa6;
-    stroke-width: 10;
-    stroke-linecap: round;
-  
-    /* initialize to fully empty */
-    stroke-dasharray: 283;   
-    stroke-dashoffset: 283;  
-  
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
-    transition: stroke-dashoffset 1s ease;
-  }
-
-  .rotated {
-    transform: rotate(-90deg);
-  }
-  
-  .rotated circle {
-    transform-origin: 46px 46px; 
-  }
-  
-
-  main .insights {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 2.6rem;
-    padding: 1rem;
+  main > h1 {
+    margin: 0 0 1rem;
+    padding: 1rem 2rem;
     background: var(--dark-blue);
-    color: var(--darkest-black);
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
   }
-  
 
-main .insights > div{
-    background: var(--color-white);
-    padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
-    margin-top: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: transform 200ms ease;
-}
-
-main .insights >div:hover {
-    transform: translateY(-4px);
-}
-
-main .insights >div span{
-    background: var(--color-primary);
-    padding: 0.5rem;
-    border-radius: 50%;
-    color: var(--color-white);
-    font-size: 2rem;
-
-}
-
-main .insights >div.expenses span{
-    background: var(--color-danger);
-}
-
-main .insights >div.income span{
-    background: var(--color-success);
-}
-
-main .insights >div .middle{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-
-main .insights h3{
-   margin: 1rem 0 0.6rem;
-   font-size: 1rem;
-}
-
-main .insights .progress{
-    position: relative;
-    width:92px ;
-    height: 92px;
-    border-radius: 50%;
- }
-
- main .insights svg{
-   width: 7rem;
-   height: 7rem;
- } 
