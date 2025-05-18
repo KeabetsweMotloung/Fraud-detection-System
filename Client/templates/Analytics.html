@@ -46,7 +46,7 @@
         <!-- Main section -->
         <main>
             <h1>Fraud Detection Analytics</h1>
-        <div class="container">
+        <div class="kpi_container">
             <div class="header">
                 
             </div>
@@ -76,10 +76,68 @@
             </div>
 
             <div class="charts">
-
+                <canvas id="fraudTime"></canvas>
+                <canvas id="amountBox"></canvas>
+                <canvas id="confusionMetrix"></canvas>
+                <canvas id="fraudPie"></canvas>
             </div>
 
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx1 = document.getElementById('fraudTime').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['0h','1h','2h','3h','4h','5h','6h','7h','8h','9h'],
+                datasets: [{
+                    label: 'Fraud Cases Over Time',
+                    data: [0, 2, 4, 3, 5, 7, 6, 8, 9, 10],
+                    borderColor: 'red',
+                    fill: false
+                }]
+            }
+        });
+
+        const ctx2 = document.getElementById('amountBox').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Fraud', 'Non-Fraud'],
+                datasets: [{
+                    label: 'Transaction Amounts',
+                    data: [250, 70],
+                    backgroundColor: ['crimson', 'green']
+                }]
+            }
+        });
+
+        const ctx3 = document.getElementById('confusionMatrix').getContext('2d');
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['TP', 'FP', 'FN', 'TN'],
+                datasets: [{
+                    label: 'Confusion Matrix',
+                    data: [470, 25, 18, 133077],
+                    backgroundColor: ['blue', 'orange', 'red', 'green']
+                }]
+            }
+        });
+
+        const ctx4 = document.getElementById('fraudPie').getContext('2d');
+        new Chart(ctx4, {
+            type: 'doughnut',
+            data: {
+                labels: ['Fraud', 'Non-Fraud'],
+                datasets: [{
+                    data: [492, 134098],
+                    backgroundColor: ['crimson', 'lightgray']
+                }]
+            }
+        });
+    </script>
 
             
         </main>
