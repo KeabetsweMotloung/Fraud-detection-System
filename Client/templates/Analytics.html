@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fraud Detection Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Analytics_style.css') }}">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 </head>
 <body>
@@ -22,13 +23,13 @@
             </div>
 
             <div class="sidebar">
-                <a href="#" class="active">
+                <a href="{{ url_for('dashboard')}}" class="active">
                     <span class="material-icons-sharp">grid_view</span>
                     <div class ="Title">
                         <h3>Dashboard</h3>
                     </div>
                 </a>
-                <a href="#" class="active">
+                <a href="{{ url_for('analytics')}}" class="active">
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Analytics</h3>
                 </a>
@@ -43,117 +44,119 @@
             </div>
         </aside>
 
-        <!-- Main section -->
-        <main>
-            <h1>Fraud Detection Analytics</h1>
-        <div class="kpi_container">
-            <div class="header">
-                
-            </div>
-
-            <div class="KPI">
-                <div class="card">
-                    <h3>Total Transactions</h3>
-                    <p>134,590</p>
-                </div>
-
-                <div class="card">
-                    <h3>Fraudulent Transactions</h3>
-                    <p>134,590</p>
-                </div>
-
-                <div class="card">
-                    <h3>Detection Rate (Recall)</h3>
-                    <p>134,590</p>
-                </div>
-
-
-                <div class="card">
-                    <h3>False Positive Rate</h3>
-                    <p>134,590</p>
-                </div>
-
-            </div>
-
-            <div class="charts">
-                <canvas id="fraudTime"></canvas>
-                <canvas id="amountBox"></canvas>
-                <canvas id="confusionMetrix"></canvas>
-                <canvas id="fraudPie"></canvas>
-            </div>
-
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx1 = document.getElementById('fraudTime').getContext('2d');
-        new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: ['0h','1h','2h','3h','4h','5h','6h','7h','8h','9h'],
-                datasets: [{
-                    label: 'Fraud Cases Over Time',
-                    data: [0, 2, 4, 3, 5, 7, 6, 8, 9, 10],
-                    borderColor: 'red',
-                    fill: false
-                }]
-            }
-        });
-
-        const ctx2 = document.getElementById('amountBox').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Fraud', 'Non-Fraud'],
-                datasets: [{
-                    label: 'Transaction Amounts',
-                    data: [250, 70],
-                    backgroundColor: ['crimson', 'green']
-                }]
-            }
-        });
-
-        const ctx3 = document.getElementById('confusionMatrix').getContext('2d');
-        new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: ['TP', 'FP', 'FN', 'TN'],
-                datasets: [{
-                    label: 'Confusion Matrix',
-                    data: [470, 25, 18, 133077],
-                    backgroundColor: ['blue', 'orange', 'red', 'green']
-                }]
-            }
-        });
-
-        const ctx4 = document.getElementById('fraudPie').getContext('2d');
-        new Chart(ctx4, {
-            type: 'doughnut',
-            data: {
-                labels: ['Fraud', 'Non-Fraud'],
-                datasets: [{
-                    data: [492, 134098],
-                    backgroundColor: ['crimson', 'lightgray']
-                }]
-            }
-        });
-    </script>
-
-            
-        </main>
-    </div>
-
-
-    
-
       
-        
+        <main>
+          <h1>Fraud Detection Analytics</h1>
+
+      <div class="KPI">
+        <div class="card"><h3>Total Transactions</h3><p>134,590</p></div>
+        <div class="card"><h3>Fraudulent Transactions</h3><p>492</p></div>
+        <div class="card"><h3>Recall</h3><p>87.18%</p></div>
+        <div class="card"><h3>FPR</h3><p>1.2%</p></div>
+      </div>
+
+      <div class="charts">
+        <canvas id="actualPredChart" width="400" height="200"></canvas>
+        <canvas id="prCurve"         width="400" height="200"></canvas>
+      </div>
+    </main>
+  </div>
+
+
+   <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1) Actual vs Predicted
+    const ctxAP = document.getElementById('actualPredChart').getContext('2d');
+    new Chart(ctxAP, {
+      type: 'bar',
+      data: {
+        labels: ['Non-Fraud', 'Fraud'],
+        datasets: [
+          { label: 'Actual',    data: [25594, 39], backgroundColor: 'steelblue' },
+          { label: 'Predicted', data: [25589, 44], backgroundColor: 'darkorange' }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Number of Transactions'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Transaction Class'
+            }
+          }
+        },
+        plugins: {
+          datalabels: { anchor: 'end', align: 'top' },
+          title: {
+            display: true,
+            text: 'Actual vs Predicted Transactions (Fraud Detection)',
+            font: {
+              size: 18
+            }
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+
+    // 2) Precision–Recall Curve
+    fetch('/api/pr-curve')
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then(pr => {
+        console.log('PR data:', pr);
+        const ctxPR = document.getElementById('prCurve').getContext('2d');
+        new Chart(ctxPR, {
+          type: 'line',
+          data: {
+            labels: pr.recall,
+            datasets: [{
+              label: 'Precision–Recall',
+              data: pr.precision,
+              fill: false,
+              borderColor: 'teal'
+            }]
+          },
+          options: {
+            plugins: {
+              title: {
+                display: true,
+                text: `Precision-Recall Curve (AP = ${pr.avg_prec})`,
+                font: {
+                  size: 18
+                }
+              }
+            },
+            scales: {
+              x: {
+                type: 'linear',
+                title: {
+                  display: true,
+                  text: 'Recall'
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'Precision'
+                }
+              }
+            }
+          }
+        });
+      })
+      .catch(err => console.error('PR-curve load failed:', err));
+  });
+</script>
+
 </body>
-
-
 </html>
-
-
-  
-
-

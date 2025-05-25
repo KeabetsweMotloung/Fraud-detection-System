@@ -6,13 +6,23 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 import pandas as pd
 from flask_cors import CORS
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import precision_recall_curve, average_precision_score
 from threading import Thread
 from imblearn.over_sampling import SMOTE
+
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 template_dir = os.path.join(current_dir, '..','Client','templates')
 static_dir = os.path.join(current_dir, '..','Client','static')
+
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+scripts_dir = os.path.abspath(os.path.join(current_dir, '..', 'scripts'))
+sys.path.append(scripts_dir)
+
+from model_evaluation import evaluate_xgboost_with_randomsearch
+
 
 
 
@@ -76,27 +86,50 @@ def predict():
         return jsonify({"error": str(e)}), 400
     
 
-@app.route('/start-pipeline',methods=['POST'])
-def start_pipeline():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file part'}),400
-    
-    file = request.files['file']
-  
 
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}),400
+@app.route("/api/pr-curve")
+def pr_curve_api():
 
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-    file.save(file_path)
-
-     # Simulating the pipeline process
     try:
-        print(f"Processing file: {file_path}")
-        # Replace this with your actual pipeline code
-        return jsonify({'message': f'Pipeline started successfully with file {file.filename}'}), 200
+        csv_path = os.path.join(current_dir,'..', 'app','data','creditcard_sampled.csv')
+        if not os.path.exists(csv_path):
+            raise FileNotFoundError(f"Could not find csv at {csv_path}")
+    # load or re-split your data here exactly as in __main__
+    
+        df = pd.read_csv(csv_path)
+        X = df.drop(columns=['Class'])
+        y = df['Class']
+
+        X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.3,random_state=42 )
+        sm = SMOTE(random_state=42)
+        X_res, y_res   = sm.fit_resample(X_train, y_train)
+
+        # this returns the dict you printed
+        model_path = os.path.join(current_dir,'..','models','fraud_model.joblib')
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"Trained model not found at {model_path}")    
+        
+        model = joblib.load(model_path)
+        
+        # 📈 Generate predictions for PR curve
+        y_score = model.predict_proba(X_test)[:, 1]
+        precision, recall, _ = precision_recall_curve(y_test, y_score)
+        avg_prec = average_precision_score(y_test, y_score)
+
+
+        pr_data = {
+            "precision": precision.tolist(),
+            "recall": recall.tolist(),
+            "avg_prec": round(avg_prec, 2)
+        }
+
+        return jsonify(pr_data)
+
+
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        app.logger.error("Error in /api/pr-curve", exc_info=e)
+        return jsonify({"error": str(e)}),500
+
 
 
 if __name__ == "__main__":

@@ -329,7 +329,7 @@ box-sizing: border-box;
 }
 
 
-/* Responsive */
+/* Responsive
 @media (max-width: 768px) {
     aside {
         display: none;
@@ -342,5 +342,5 @@ box-sizing: border-box;
     main {
         padding: 15px;
     }
-}
+} */
 

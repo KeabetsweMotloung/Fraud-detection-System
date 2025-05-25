@@ -2,7 +2,7 @@ from xgboost import XGBClassifier
 from sklearn.model_selection import RandomizedSearchCV, train_test_split
 from imblearn.pipeline import Pipeline
 from imblearn.over_sampling import SMOTE
-from sklearn.metrics import confusion_matrix, f1_score, recall_score, precision_score, roc_auc_score, precision_recall_curve
+from sklearn.metrics import confusion_matrix, f1_score, recall_score, precision_score, roc_auc_score, precision_recall_curve,average_precision_score
 import pandas as pd
 import time
 import numpy as np
@@ -68,14 +68,30 @@ def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
     roc_auc = roc_auc_score(y_test, best_model.predict_proba(X_test)[:, 1])
     print(f'ROC-AUC: {roc_auc:.4f}')
 
+    # Precision recall data for graphs
+    y_score = best_model.predict_proba(X_test)[:, 1]
+
+    # compute precision, recall at all thresholds
+    precision, recall,_ = precision_recall_curve(y_test, y_score)
+    avg_prec = average_precision_score(y_test, y_score)
+
+    # package into a dict you can jsonify into the template
+    pr_data = {
+        "precision": precision.tolist(),
+        "recall":    recall.tolist(),
+        "avg_prec":  round(avg_prec, 2)
+    }
 
 
     # Save the model
-    model_path = os.path.join('models','Fraud_model.joblib')
+    this_file = os.path.abspath(__file__)
+    base_dir  = os.path.dirname(os.path.dirname(this_file))  # go from scripts/ to root
+    models_dir = os.path.join(base_dir, 'models')
+    model_path = os.path.join(models_dir, 'Fraud_model.joblib')
 
     joblib.dump(best_model,model_path)
     print(f"Model saved as xgboost_model.pkl at: {model_path}")
-
+    return pr_data
 
 
 if __name__ == "__main__":
@@ -94,3 +110,6 @@ if __name__ == "__main__":
 
     # Evaluate XGBoost model with RandomizedSearchCV
     evaluate_xgboost_with_randomsearch(X_train_resampled, y_train_resampled, X_test, y_test)
+
+
+   
