@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Analytics_style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.0/dist/chartjs-chart-matrix.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 </head>
 <body>
@@ -58,6 +59,7 @@
       <div class="charts">
         <canvas id="actualPredChart" width="400" height="200"></canvas>
         <canvas id="prCurve"         width="400" height="200"></canvas>
+        <canvas id="confMatrix" width="400" height="300"></canvas>
       </div>
     </main>
   </div>
@@ -156,6 +158,75 @@
       })
       .catch(err => console.error('PR-curve load failed:', err));
   });
+// Confusion matrix
+const dataMatrix = [
+  { x: 0, y: 0, v: 25594 }, // TN
+    { x: 1, y: 0, v: 5 },     // FP
+    { x: 0, y: 1, v: 34 },    // FN
+    { x: 1, y: 1, v: 39 }     // TP
+];
+
+const ctx = document.getElementById('confMatrix').getContext('2d');
+
+new Chart(ctx, {
+  type: 'matrix',
+  data: {
+    datasets: [{
+      label: 'Confusion Matrix',
+      data:dataMatrix,
+      backgroundColor(context) {
+        const value = context.dataset.data[content.dataIndex].v;
+        const alpha = Math.min(1,value/26000);
+        return `rgba(0, 123, 255, ${alpha})`;
+
+      },
+      width: ({ chart }) => chart.chartArea.width / 2,
+      height: ({ chart }) => chart.chartArea.height / 2,
+      borderColor: '#ffffff',
+      borderWidth: 1
+    }]
+ },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Confusion Matrix (Fraud Detection)'
+        },
+        tooltip: {
+          callbacks: {
+            label(context) {
+              const labels = ['Actual Non-Fraud', 'Actual Fraud'];
+              const preds = ['Predicted Non-Fraud', 'Predicted Fraud'];
+              const v = context.raw.v;
+              return `${labels[context.raw.y]} - ${preds[context.raw.x]}: ${v}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          display: true,
+          position: 'top',
+          ticks: {
+            callback: (val) => ['Predicted Non-Fraud', 'Predicted Fraud'][val]
+          },
+          grid: { display: false }
+        },
+        y: {
+          type: 'linear',
+          display: true,
+          ticks: {
+            callback: (val) => ['Actual Non-Fraud', 'Actual Fraud'][val]
+          },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+
+
+
 </script>
 
 </body>
