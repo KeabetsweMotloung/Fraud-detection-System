@@ -69,11 +69,11 @@ def predict():
         data = request.get_json()
         df = pd.DataFrame([data])
 
-        # Ensure input matches model's expected features
+        
         expected_features = model.named_steps['xgb'].feature_names_in_
         df = df[expected_features]
 
-        # Make prediction
+        
         prediction = model.predict(df)[0]
         probability = model.predict_proba(df)[:, 1][0]
 
