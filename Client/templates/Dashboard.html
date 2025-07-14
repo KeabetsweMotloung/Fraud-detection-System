@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Dashboard_style.css') }}">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@500;700&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <div class="container">
+    <div class="dashboard-shell">
         <aside>
             <div class="top">
                 <div class="logo">
@@ -36,18 +38,19 @@
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Home page</h3>
                 </a>
-                <a href="#" class="active">
-                    <span class="material-icons-sharp">grid_view</span>
-                    <h3>Log out</h3>
-                </a>
             </div>
         </aside>
 
         
-        <main>
-            <h1>Dashboard</h1>
+        
+        <div class="main">
+            <div class="dashboard-header">
+                
+                <h1 class="dashboard-title"><span id="typed"></span></h1>
 
+            </div>
 
+            <main>
             <div class="insights">
                 <!-- Algorithm Time -->
                 <div class="algorithm-time">
@@ -191,6 +194,19 @@
           });
         });
       </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+  const typed = new Typed("#typed", {
+    strings: ["Fraud Detection Dashboard"],
+    typeSpeed: 60,
+    backSpeed: 0,
+    loop: false,
+    showCursor: false
+  });
+</script>
+
       
         
 </body>

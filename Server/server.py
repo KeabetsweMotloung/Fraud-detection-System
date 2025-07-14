@@ -111,7 +111,7 @@ def pr_curve_api():
         
         model = joblib.load(model_path)
         
-        # 📈 Generate predictions for PR curve
+        # Generate predictions for PR curve
         y_score = model.predict_proba(X_test)[:, 1]
         precision, recall, _ = precision_recall_curve(y_test, y_score)
         avg_prec = average_precision_score(y_test, y_score)

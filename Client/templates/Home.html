@@ -28,24 +28,7 @@
                 <p>In a world where every transaction counts, staying ahead of fraud has never been more critical. Our cutting-edge technology leverages the power of data to detect and prevent fraudulent activity in real-time. By using advanced algorithms and machine learning, we analyze patterns, identify risks, and provide you with the ultimate protection — all while you go about your day with peace of mind. With our app, security isn’t just a feature; it’s the foundation of your financial freedom.</p>
                 <a href ="{{ url_for('dashboard')}}"> <button class="request_invite_btn">Get Started</button></a>
 
-                <div class="upload-container">
-                    <label for="file-dropdown">Select a file:</label>
-                    <select id="file-dropdown" class="file-dropdown">
-                        <option value="">-- Choose an uploaded file --</option>
-                        <option value="file">credit_card_fraud_synthetic_1000.csv</option>
-                    </select>
-
-                    <input type="file" id="file-input" style="display: none;"/>
-
-                    <button id="start-pipeline" onclick="startPipeline()">Start Pipeline</button>
-
-                    <div id="status"></div>
                     
-                    <p>or upload a new file:</p>
-                    <input type="file" id="file-input" class="file-input" accept=".csv">
-                    
-                    <button class="upload-button">Upload</button>
-                </div>
 
             </div>
             <div class="mockup">
@@ -139,38 +122,6 @@ window.onload = function () {
     adjustMargin(); 
     window.addEventListener("resize", adjustMargin);
 };
-
-
-// START PIPELINE PROCESS
-
-        document.getElementById('fileInput').style.display = 'block';
-
-        function startPipeline() {
-            const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
-
-            if (!file) {
-                alert('Please select a file!');
-                return;
-            }
-
-            // Now trigger the pipeline - in this case, sending the file to backend or starting the process
-            const formData = new FormData();
-            formData.append('file', file);
-
-            // Example of sending to a backend endpoint using fetch
-            fetch('/start-pipeline', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('status').innerText = `Pipeline started successfully!`;
-            })
-            .catch(error => {
-                document.getElementById('status').innerText = `Error starting pipeline: ${error}`;
-            });
-        }
 
 
 </script>

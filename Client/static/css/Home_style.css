@@ -49,12 +49,11 @@ header {
     height: auto;
     min-height: 80px;
     box-sizing: border-box;
-    border: 2px solid red;
+
 }
 
 main{
     margin-top: 80px;
-    border: 2px solid blue;
 }
 
 
@@ -122,6 +121,16 @@ span, p {
     transform: translate(40%);
 }
 
+.brief_details h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.brief_details p{
+    font-size: 18px;
+}
+
+
 .request_invite_btn {
     display: grid;
     outline: none;
@@ -136,10 +145,6 @@ span, p {
     margin: 20px 0;
 }
 
-.brief_details h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
-}
 
 .mockup-img {
     width: 80%;
@@ -152,7 +157,7 @@ span, p {
 .reason {
     padding: 60px 50px; 
     background-color: var(--dark-blue); 
-    transition: background-color 0.5s ease; /* Smooth transition */
+    transition: background-color 0.5s ease; 
 }
 
 .reason h1 {
@@ -383,41 +388,6 @@ footer ul {
         gap: 0.75rem;
         margin: 0.5rem 0;
     }
-}
-
-
-/* upload container */
-
-
-.upload-container {
-    text-align: center;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin: auto;
-}
-
-.file-dropdown, .file-input, .upload-button {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 8px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.upload-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.upload-button:hover {
-    background-color: #0056b3;
 }
 
 

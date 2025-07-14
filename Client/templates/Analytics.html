@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+   <div class="dashboard-shell">
         <aside>
             <div class="top">
                 <div class="logo">
@@ -38,16 +38,17 @@
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Home page</h3>
                 </a>
-                <a href="#" class="active">
-                    <span class="material-icons-sharp">grid_view</span>
-                    <h3>Log out</h3>
-                </a>
+      
             </div>
         </aside>
 
       
-        <main>
-          <h1>Fraud Detection Analytics</h1>
+        <div class="main">
+          <div class="dashboard-header">
+                
+                <h1 class="dashboard-title"><span id="typed"></span></h1>
+            </div>
+      <main>
 
       <div class="KPI">
         <div class="card"><h3>Total Transactions</h3><p>134,590</p></div>
@@ -283,6 +284,18 @@ new Chart(ctxRate, {
 
 
 
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+  const typed = new Typed("#typed", {
+    strings: ["Analytics of Fraud Detection"],
+    typeSpeed: 60,
+    backSpeed: 0,
+    loop: false,
+    showCursor: false
+  });
 </script>
 
 </body>

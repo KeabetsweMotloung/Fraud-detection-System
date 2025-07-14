@@ -148,6 +148,7 @@ aside {
     flex-direction: column;
     background: var(--dark-blue);
     color: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
   }
   
   
@@ -201,7 +202,7 @@ aside .sidebar{
 
 aside h3{
     font-weight: 700;
-    font-size:medium;
+    font-size:large;
     color: var(--color-white);
 }
 
@@ -220,12 +221,6 @@ aside .sidebar a{
 aside .sidebar a span{
     font-size: 1.6rem;
     transition: all 300ms ease;
-}
-
-aside .sidebar a:last-child{
-    position: absolute;
-    bottom: 2rem;
-    width: 100%;
 }
 
 aside .sidebar a.active{
@@ -263,17 +258,134 @@ main {
     display: flex;
     flex-direction: column;
     background: var(--color-background);
+    padding: 1.5rem 2rem;
   }
   
   
 main > h1 {
 margin: 0 0 1rem;
-padding: 1rem 2rem;
-background: var(--dark-blue);
+position: relative;
+padding: 1.5rem 2rem;
+letter-spacing: 0.5px;
+font-size: 2rem;
+/* background: var(--dark-blue); */
+ background: linear-gradient(
+    135deg,
+    #1a1a40 0%,
+    #2e2e6d 40%,
+    #3d3d94 100%
+  );
+
 color: white;
 width: 100%;
 box-sizing: border-box;
+box-shadow:
+  inset 0 -2px 4px rgba(255, 255, 255, 0.1),
+  inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  
+border-bottom: 3px solid #00BFA6;
+ background: linear-gradient(
+    135deg,
+    #1a1a40 0%,
+    #2e2e6d 40%,
+    #3d3d94 100%
+  );
 }
+
+main > h1::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
+  pointer-events: none;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.dashboard-header {
+  margin-left: 0;
+  --border-top-left-radius: 1.5rem;
+  background: linear-gradient(135deg, #1a1a40 0%, #2e2e6d 50%, #3d3d94 100%);
+  padding: 2rem;
+  padding-left: 3rem;
+  border-bottom: 3px solid var(--bright-teal);
+  border-top-right-radius: 1.5rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  color: white;
+  z-index: 1;
+  animation: slideDown 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.dashboard-header h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0;
+}
+.dashboard-shell {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.dashboard-title{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.6rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00bfa6, #7380ec);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  /* display: inline-block; */
+  animation: fadeInUp 1s ease-out forwards;
+  margin-right: 0.6rem;
+  position: relative;
+}
+
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+@keyframes shine {
+  to {
+    background-position: -200% center;
+  }
+}
+
+
+
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+}
+
 
 
 /* grey “track” circle */
@@ -313,22 +425,26 @@ box-sizing: border-box;
     grid-template-columns: repeat(3,1fr);
     gap: 2.6rem;
     padding: 1rem;
-    background: var(--dark-blue);
-    color: var(--darkest-black);
+    background: var(--color-white);
+    color: var(--color-dark);
   }
   
 
-main .insights > div{
-    background: var(--color-white);
-    padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
-    margin-top: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: transform 200ms ease;
+main .insights > div {
+  background: rgba(255, 255, 255, 0.85);        
+  backdrop-filter: blur(10px);                
+  border: 1px solid rgba(0, 0, 0, 0.05);        
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12); 
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
+
+
 main .insights >div:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.30);
 }
 
 main .insights >div span{
