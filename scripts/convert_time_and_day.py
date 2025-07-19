@@ -3,7 +3,7 @@ import pandas as pd
 
 df = pd.read_csv('app\data\creditcard_sampled.csv')
 
-# Create a new 'Day' column (1st day is 0)
+# Create a new 'hour' column
 df['Hour'] = (df['Time'] // 3600).astype(int)
 
 total_per_hour = df.groupby("Hour").size()

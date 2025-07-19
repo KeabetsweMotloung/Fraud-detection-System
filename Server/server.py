@@ -47,7 +47,6 @@ if not os.path.exists(Upload):
 app.config['UPLOAD'] = Upload
 
 
-# ROUTING
 @app.route('/')
 def home():
     return render_template('Home.html')

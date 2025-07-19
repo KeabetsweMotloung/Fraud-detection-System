@@ -40,7 +40,6 @@ def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
    
     print(f"Time taken for RandomizedSearchCV: {elapsed_time:.2f} seconds")
 
-    # Get the best model
     best_model = random_search.best_estimator_
 
    
@@ -85,7 +84,7 @@ def evaluate_xgboost_with_randomsearch(X_train, y_train, X_test, y_test):
 
     # Save the model
     this_file = os.path.abspath(__file__)
-    base_dir  = os.path.dirname(os.path.dirname(this_file))  # go from scripts/ to root
+    base_dir  = os.path.dirname(os.path.dirname(this_file)) 
     models_dir = os.path.join(base_dir, 'models')
     model_path = os.path.join(models_dir, 'Fraud_model.joblib')
 
