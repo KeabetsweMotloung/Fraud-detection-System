@@ -39,6 +39,10 @@
                     <span class="material-icons-sharp">home</span>
                     <span class="nav-text">Home</span>
                 </a>
+                <a href="{{ url_for('about') }}" class="nav-item">
+                    <span class="material-icons-sharp">info</span>
+                    <span class="nav-text">About</span>
+                </a>
             </nav>
         </aside>
 
@@ -53,7 +57,7 @@
             </header>
 
             <div class="analytics-content">
-                <!-- KPI Section -->
+               
                 <section class="kpi-section">
                     <h2 class="section-title">
                         <span class="material-icons-sharp">insights</span>
@@ -106,7 +110,7 @@
                     </div>
                 </section>
 
-                <!-- Charts Section -->
+                
                 <section class="charts-section">
                     <h2 class="section-title">
                         <span class="material-icons-sharp">trending_up</span>
@@ -187,7 +191,7 @@
             Chart.defaults.plugins.legend.labels.usePointStyle = true;
             Chart.defaults.plugins.legend.labels.padding = 20;
 
-            // Actual vs Predicted
+    // Actual vs Predicted
     const ctxAP = document.getElementById('actualPredChart').getContext('2d');
     new Chart(ctxAP, {
       type: 'bar',
@@ -406,15 +410,6 @@ new Chart(ctxRate, {
 
 
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<!-- <script>
-  const typed = new Typed("#typed", {
-    strings: ["Analytics of Fraud Detection"],
-    typeSpeed: 60,
-    backSpeed: 0,
-    loop: false,
-    showCursor: false
-  });
-</script> -->
 
 </body>
 </html>
