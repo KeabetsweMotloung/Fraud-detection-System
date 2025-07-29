@@ -3,259 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fraud Detection Dashboard</title>
+    <title>IntegriTech - Fraud Detection Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Dashboard_style.css') }}">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@500;700&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    <div class="dashboard-shell">
-        <aside>
-            <div class="top">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
                 <div class="logo">
-                    <img src="{{ url_for('static', filename='images/Integritech.png') }}" alt="Logo">
-                    <h2>Integri <span class="danger">Tech</span></h2>
+                    <img src="{{ url_for('static', filename='images/Integritech.png') }}" alt="IntegriTech Logo">
+                    <h2>Integri<span class="accent">Tech</span></h2>
                 </div>
-                <div class="close" id="close_btn">
+                <button class="close-btn" id="close_btn">
                     <span class="material-icons-sharp">close</span>
-                </div>
+                </button>
             </div>
 
-            <div class="sidebar">
-                <a href="{{ url_for('dashboard')}}" class="active">
-                    <span class="material-icons-sharp">grid_view</span>
-                    <div class ="Title">
-                        <h3>Dashboard</h3>
-                    </div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('dashboard') }}" class="nav-item active">
+                    <span class="material-icons-sharp">dashboard</span>
+                    <span class="nav-text">Dashboard</span>
                 </a>
-                <a href="{{ url_for('analytics')}}" class="active">
-                    <span class="material-icons-sharp">grid_view</span>
-                    <h3>Analytics</h3>
+                <a href="{{ url_for('analytics') }}" class="nav-item">
+                    <span class="material-icons-sharp">analytics</span>
+                    <span class="nav-text">Analytics</span>
                 </a>
-                <a href ="{{ url_for('home')}}" class="active">
-                    <span class="material-icons-sharp">grid_view</span>
-                    <h3>Home page</h3>
+                <a href="{{ url_for('home') }}" class="nav-item">
+                    <span class="material-icons-sharp">home</span>
+                    <span class="nav-text">Home</span>
                 </a>
-            </div>
+            </nav>
         </aside>
 
         
-        
-        <div class="main">
-            <div class="dashboard-header">
-                
-                <h1 class="dashboard-title"><span id="typed"></span></h1>
+        <main class="main-content">
+            <header class="dashboard-header">
+                <button class="mobile-menu-btn" id="mobile-menu">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <h1 class="dashboard-title">
+                    <span id="typed">Fraud Detection Dashboard</span>
+                </h1>
+            </header>
 
-            </div>
-
-            <main>
-            <div class="insights">
-                <div class="algorithm-time">
-                    <span class="material-icons-sharp" title="The amount of time it takes for the algorithm to compute">timer</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Algorithm Time</h3>
-                            <h1>3 min 42 sec</h1>
+            <div class="dashboard-content">
+                <div class="metrics-grid">
+                    <!-- Algorithm Time -->
+                    <div class="metric-card">
+                        <div class="card-header">
+                            <div class="icon-wrapper algorithm">
+                                <span class="material-icons-sharp">timer</span>
+                            </div>
+                            <div class="metric-details">
+                                <h3>Algorithm Time</h3>
+                                <div class="metric-value">3 min 42 sec</div>
+                            </div>
                         </div>
-                        <div class="progress" data-percentage="90">
-                            <svg viewBox="0 0 100 100" class="progress-ring">
-                                <defs>
-                                    <linearGradient id="green-gradient" x1="1" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="00bfa6"/>
-                                        <stop offset="100%" stop-color="#7380ec"/>
-                                    </linearGradient>
-                                </defs>
-                            
-                              <circle cx="50" cy="50" r="45" class="bg-circle"/>
-                              <circle cx="50" cy="50" r="45" class="progress-circle"/>
-                            </svg>
-                          </div>
-                          
-                    </div>
-                    <small class="text-muted">Last Execution: 222.39 sec</small>
-                </div>
-
-                <div class="fraud_detection_rate">
-                    <span class="material-icons-sharp" title="Shows how well fraud cases are caught">check_circle</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Fraud Detection Rate (%)</h3>
-                            <h1>87.18%</h1>
+                        <div class="progress-wrapper">
+                            <div class="progress-circle" data-percentage="90">
+                                <svg viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" class="bg-circle"/>
+                                    <circle cx="50" cy="50" r="45" class="progress-bar"/>
+                                </svg>
+                                <div class="percentage">90%</div>
+                            </div>
                         </div>
-                        <div class="progress" data-percentage="87.18">
-                            <svg viewBox="0 0 100 100" class="progress-ring">
-                                <defs>
-                                    <linearGradient id="green-gradient" x1="1" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="00bfa6"/>
-                                        <stop offset="100%" stop-color="#7380ec"/>
-                                    </linearGradient>
-                                </defs>
-                            
-                              <circle cx="50" cy="50" r="45" class="bg-circle"/>
-                              <circle cx="50" cy="50" r="45" class="progress-circle"/>
-                            </svg>
-                          </div>
-                          
-                        
-                    </div>
-                    <small class="text-muted">Last Execution: 87.18%</small>
-                </div>
-
-                <div class="false_postive_rate">
-                    <span class="material-icons-sharp" title="Percentage of false alarm">error</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>False Positive Rate (FPR)</h3>
-                            <h1>0.035%</h1>
+                        <div class="card-footer">
+                            <small>Last Execution: 222.39 sec</small>
                         </div>
-                       <div class="progress" data-percentage="2">
-                            <svg viewBox="0 0 100 100" class="progress-ring">
-                                <defs>
-                                    <linearGradient id="green-gradient" x1="1" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="00bfa6"/>
-                                        <stop offset="100%" stop-color="#7380ec"/>
-                                    </linearGradient>
-                                </defs>
-                            
-                              <circle cx="50" cy="50" r="45" class="bg-circle"/>
-                              <circle cx="50" cy="50" r="45" class="progress-circle"/>
-                            </svg>
-                          </div>
-                          
                     </div>
-                    <small class="text-muted">Last Execution: 0.035%</small>
-                </div>
 
-                
-                <div class="false_negative_rate">
-                    <span class="material-icons-sharp" title="Missed fraud by the algorithm">cancel</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>False Negative Rate (FNR)</h3>
-                            <h1>12.82%</h1>
+                    <!-- Fraud Detection Rate -->
+                    <div class="metric-card">
+                        <div class="card-header">
+                            <div class="icon-wrapper detection">
+                                <span class="material-icons-sharp">security</span>
+                            </div>
+                            <div class="metric-details">
+                                <h3>Fraud Detection Rate</h3>
+                                <div class="metric-value">87.18%</div>
+                            </div>
                         </div>
-                       <div class="progress" data-percentage="12.82">
-                            <svg viewBox="0 0 100 100" class="progress-ring">
-                                <defs>
-                                    <linearGradient id="green-gradient" x1="1" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="00bfa6"/>
-                                        <stop offset="100%" stop-color="#7380ec"/>
-                                    </linearGradient>
-                                </defs>
-                            
-                              <circle cx="50" cy="50" r="45" class="bg-circle"/>
-                              <circle cx="50" cy="50" r="45" class="progress-circle"/>
-                            </svg>
-                          </div>
-                          
+                        <div class="progress-wrapper">
+                            <div class="progress-circle" data-percentage="87">
+                                <svg viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" class="bg-circle"/>
+                                    <circle cx="50" cy="50" r="45" class="progress-bar"/>
+                                </svg>
+                                <div class="percentage">87%</div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small>Last Execution: 87.18%</small>
+                        </div>
                     </div>
-                    <small class="text-muted">Last Execution: 12.82%</small>
-                </div>
 
-               
-                <div class="cost_savings_estimate">
-                    <span class="material-icons-sharp" title="The savings from the algorithm">attach_money</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Cost Savings Estimate</h3>
-                            <h1 id="cost-savings">R17,000</h1>
+                    <!-- False Positive Rate -->
+                    <div class="metric-card">
+                        <div class="card-header">
+                            <div class="icon-wrapper warning">
+                                <span class="material-icons-sharp">error_outline</span>
+                            </div>
+                            <div class="metric-details">
+                                <h3>False Positive Rate</h3>
+                                <div class="metric-value">0.035%</div>
+                            </div>
                         </div>
-                       <div class="progress" data-percentage="90">
-                            <svg viewBox="0 0 100 100" class="progress-ring">
-                                <defs>
-                                    <linearGradient id="green-gradient" x1="1" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="00bfa6"/>
-                                        <stop offset="100%" stop-color="#7380ec"/>
-                                    </linearGradient>
-                                </defs>
-                            
-                              <circle cx="50" cy="50" r="45" class="bg-circle"/>
-                              <circle cx="50" cy="50" r="45" class="progress-circle"/>
-                            </svg>
-                          </div>
-                          
+                        <div class="progress-wrapper">
+                            <div class="progress-circle" data-percentage="4">
+                                <svg viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" class="bg-circle"/>
+                                    <circle cx="50" cy="50" r="45" class="progress-bar"/>
+                                </svg>
+                                <div class="percentage">4%</div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small>Last Execution: 0.035%</small>
+                        </div>
                     </div>
-                    <small class="text-muted">Last Execution: R17,000</small>
-                </div>
 
-              
-                <div class="roc_auc_score">
-                    <span class="material-icons-sharp" title="Indicates overall model quality.">show_chart</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>ROC-AUC Score</h3>
-                            <h1>0.9850</h1>
+                    <!-- False Negative Rate -->
+                    <div class="metric-card">
+                        <div class="card-header">
+                            <div class="icon-wrapper error">
+                                <span class="material-icons-sharp">cancel</span>
+                            </div>
+                            <div class="metric-details">
+                                <h3>False Negative Rate</h3>
+                                <div class="metric-value">12.82%</div>
+                            </div>
                         </div>
-                       <div class="progress" data-percentage="4">
-                            <svg viewBox="0 0 100 100" class="progress-ring">
-                                <defs>
-                                    <linearGradient id="green-gradient" x1="1" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="00bfa6"/>
-                                        <stop offset="100%" stop-color="#7380ec"/>
-                                    </linearGradient>
-                                </defs>
-                            
-                              <circle cx="50" cy="50" r="45" class="bg-circle"/>
-                              <circle cx="50" cy="50" r="45" class="progress-circle"/>
-                            </svg>
-                          </div>
-                          
+                        <div class="progress-wrapper">
+                            <div class="progress-circle" data-percentage="13">
+                                <svg viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" class="bg-circle"/>
+                                    <circle cx="50" cy="50" r="45" class="progress-bar"/>
+                                </svg>
+                                <div class="percentage">13%</div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small>Last Execution: 12.82%</small>
+                        </div>
                     </div>
-                    <small class="text-muted">Last Execution: 0.9850</small>
+
+                    <!-- Cost Savings -->
+                    <div class="metric-card">
+                        <div class="card-header">
+                            <div class="icon-wrapper success">
+                                <span class="material-icons-sharp">savings</span>
+                            </div>
+                            <div class="metric-details">
+                                <h3>Cost Savings Estimate</h3>
+                                <div class="metric-value" id="cost-savings">R17,000</div>
+                            </div>
+                        </div>
+                        <div class="progress-wrapper">
+                            <div class="progress-circle" data-percentage="85">
+                                <svg viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" class="bg-circle"/>
+                                    <circle cx="50" cy="50" r="45" class="progress-bar"/>
+                                </svg>
+                                <div class="percentage">85%</div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small>Last Execution: R17,000</small>
+                        </div>
+                    </div>
+
+                    <!-- ROC-AUC Score -->
+                    <div class="metric-card">
+                        <div class="card-header">
+                            <div class="icon-wrapper info">
+                                <span class="material-icons-sharp">trending_up</span>
+                            </div>
+                            <div class="metric-details">
+                                <h3>ROC-AUC Score</h3>
+                                <div class="metric-value">0.9850</div>
+                            </div>
+                        </div>
+                        <div class="progress-wrapper">
+                            <div class="progress-circle" data-percentage="98">
+                                <svg viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" class="bg-circle"/>
+                                    <circle cx="50" cy="50" r="45" class="progress-bar"/>
+                                </svg>
+                                <div class="percentage">98%</div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small>Last Execution: 0.9850</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 
-
     
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          document.querySelectorAll('.progress').forEach(progress => {
-            const circle = progress.querySelector('.progress-circle');
-            const pct = parseFloat(progress.dataset.percentage);
-            if (!circle || isNaN(pct)) return;
-      
-            // circumference
-           
-            const radius = parseFloat(circle.getAttribute("r"));
-            const circumference = 2 * Math.PI * radius;
-      
-            //start off as empty
-            circle.style.strokeDasharray  = '${circumference}';
-            circle.style.strokeDashoffset = '${circumference}';
-      
-            //next frame then animate to target
-            requestAnimationFrame(() => {
-              circle.style.strokeDashoffset = circumference - (pct/100) * circumference;
-              circle.style.strokeDashoffset = '${offset}'
+        document.addEventListener('DOMContentLoaded', function() {
+        //     const typed = new Typed("#typed", {
+        //         strings: ["Fraud Detection Dashboard"],
+        //         // typeSpeed: 1,
+        //         // backSpeed: 0,
+        //         // loop: false,
+        //         showCursor: false
+        //     });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu');
+            const sidebar = document.querySelector('.sidebar');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    sidebar.classList.toggle('mobile-open');
+                });
+            }
+
+            // Progress circle animation
+            const progressCircles = document.querySelectorAll('.progress-circle');
+            progressCircles.forEach(function(circle) {
+                const percentage = parseInt(circle.getAttribute('data-percentage'));
+                const progressBar = circle.querySelector('.progress-bar');
+                const radius = 45;
+                const circumference = 2 * Math.PI * radius;
+                
+                progressBar.style.strokeDasharray = circumference + ' ' + circumference;
+                progressBar.style.strokeDashoffset = circumference;
+                
+                setTimeout(function() {
+                    const offset = circumference - (percentage / 100) * circumference;
+                    progressBar.style.strokeDashoffset = offset;
+                }, 500);
             });
-          });
+
+            // Card hover effects
+            const cards = document.querySelectorAll('.metric-card');
+            cards.forEach(function(card) {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
         });
-      </script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script>
-  const typed = new Typed("#typed", {
-    strings: ["Fraud Detection Dashboard"],
-    typeSpeed: 60,
-    backSpeed: 0,
-    loop: false,
-    showCursor: false
-  });
-</script>
-
-      
-        
+    </script>
 </body>
-
-
 </html>
-
-
-  
-
-

@@ -59,6 +59,11 @@ def analytics():
 def dashboard():
     return render_template('Dashboard.html')
 
+@app.route('/about')
+def about():
+    return render_template('About.html')
+
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
