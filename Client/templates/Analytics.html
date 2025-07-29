@@ -3,73 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fraud Detection Dashboard</title>
+    <title>IntegriTech - Analytics Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Analytics_style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.0/dist/chartjs-chart-matrix.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    
+
 </head>
 <body>
-   <div class="dashboard-shell">
-        <aside>
-            <div class="top">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
                 <div class="logo">
-                    <img src="{{ url_for('static', filename='images/Integritech.png') }}" alt="Logo">
-                    <h2>Integri <span class="danger">Tech</span></h2>
+                    <img src="{{ url_for('static', filename='images/Integritech.png') }}" alt="IntegriTech Logo">
+                    <h2>Integri<span class="accent">Tech</span></h2>
                 </div>
-                <div class="close" id="close_btn">
+                <button class="close-btn" id="close_btn">
                     <span class="material-icons-sharp">close</span>
-                </div>
+                </button>
             </div>
 
-            <div class="sidebar">
-                <a href="{{ url_for('dashboard')}}" class="active">
-                    <span class="material-icons-sharp">grid_view</span>
-                    <div class ="Title">
-                        <h3>Dashboard</h3>
-                    </div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('dashboard') }}" class="nav-item">
+                    <span class="material-icons-sharp">dashboard</span>
+                    <span class="nav-text">Dashboard</span>
                 </a>
-                <a href="{{ url_for('analytics')}}" class="active">
-                    <span class="material-icons-sharp">grid_view</span>
-                    <h3>Analytics</h3>
+                <a href="{{ url_for('analytics') }}" class="nav-item active">
+                    <span class="material-icons-sharp">analytics</span>
+                    <span class="nav-text">Analytics</span>
                 </a>
-                <a href ="{{ url_for('home')}}" class="active">
-                    <span class="material-icons-sharp">grid_view</span>
-                    <h3>Home page</h3>
+                <a href="{{ url_for('home') }}" class="nav-item">
+                    <span class="material-icons-sharp">home</span>
+                    <span class="nav-text">Home</span>
                 </a>
-      
-            </div>
+            </nav>
         </aside>
 
-      
-        <div class="main">
-          <div class="dashboard-header">
-                
-                <h1 class="dashboard-title"><span id="typed"></span></h1>
+        <main class="main-content">
+            <header class="dashboard-header">
+                <button class="mobile-menu-btn" id="mobile-menu">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <h1 class="dashboard-title">
+                    <span id="typed">Analytics Dashboard</span>
+                </h1>
+            </header>
+
+            <div class="analytics-content">
+                <!-- KPI Section -->
+                <section class="kpi-section">
+                    <h2 class="section-title">
+                        <span class="material-icons-sharp">insights</span>
+                        Key Performance Indicators
+                    </h2>
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <h3 class="kpi-title">Total Transactions</h3>
+                                <div class="kpi-icon">
+                                    <span class="material-icons-sharp">receipt_long</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">134,590</div>
+                            <div class="kpi-description">Processed in current period</div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <h3 class="kpi-title">Fraudulent Transactions</h3>
+                                <div class="kpi-icon">
+                                    <span class="material-icons-sharp">warning</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">492</div>
+                            <div class="kpi-description">Detected and flagged</div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <h3 class="kpi-title">Detection Recall</h3>
+                                <div class="kpi-icon">
+                                    <span class="material-icons-sharp">security</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">87.18%</div>
+                            <div class="kpi-description">True positive rate</div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <h3 class="kpi-title">False Positive Rate</h3>
+                                <div class="kpi-icon">
+                                    <span class="material-icons-sharp">error_outline</span>
+                                </div>
+                            </div>
+                            <div class="kpi-value">1.2%</div>
+                            <div class="kpi-description">Incorrectly flagged as fraud</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts Section -->
+                <section class="charts-section">
+                    <h2 class="section-title">
+                        <span class="material-icons-sharp">trending_up</span>
+                        Performance Analytics
+                    </h2>
+                    <div class="charts-grid">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <div class="chart-icon">
+                                    <span class="material-icons-sharp">bar_chart</span>
+                                </div>
+                                <h3 class="chart-title">Actual vs Predicted Transactions</h3>
+                            </div>
+                            <canvas id="actualPredChart" class="chart-canvas"></canvas>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <div class="chart-icon">
+                                    <span class="material-icons-sharp">show_chart</span>
+                                </div>
+                                <h3 class="chart-title">Precision-Recall Curve</h3>
+                            </div>
+                            <canvas id="prCurve" class="chart-canvas"></canvas>
+                        </div>
+
+                        <div class="chart-container large">
+                            <div class="chart-header">
+                                <div class="chart-icon">
+                                    <span class="material-icons-sharp">timeline</span>
+                                </div>
+                                <h3 class="chart-title">Fraud Detection Over Time</h3>
+                            </div>
+                            <canvas id="fraudOverTime" class="chart-canvas"></canvas>
+                        </div>
+
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <div class="chart-icon">
+                                    <span class="material-icons-sharp">schedule</span>
+                                </div>
+                                <h3 class="chart-title">Hourly Fraud Rate Analysis</h3>
+                            </div>
+                            <canvas id="fraudRateByHour" class="chart-canvas"></canvas>
+                        </div>
+                    </div>
+                </section>
             </div>
-      <main>
+        </main>
+    </div>
 
-      <div class="KPI">
-        <div class="card"><h3>Total Transactions</h3><p>134,590</p></div>
-        <div class="card"><h3>Fraudulent Transactions</h3><p>492</p></div>
-        <div class="card"><h3>Recall</h3><p>87.18%</p></div>
-        <div class="card"><h3>FPR</h3><p>1.2%</p></div>
-      </div>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     // Typed.js animation
+        //     const typed = new Typed("#typed", {
+        //         strings: ["Analytics Dashboard"],
+        //         typeSpeed: 60,
+        //         backSpeed: 0,
+        //         loop: false,
+        //         showCursor: false
+        //     });
 
-      <div class="charts">
-        <canvas id="actualPredChart" width="400" height="200"></canvas>
-        <canvas id="prCurve"         width="400" height="200"></canvas>
-        <canvas id="fraudOverTime" width="400" height="300"></canvas>
-        <canvas id="fraudRateByHour" width="400" height="300"></canvas>
-      </div>
-    </main>
-  </div>
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu');
+            const sidebar = document.querySelector('.sidebar');
 
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    sidebar.classList.toggle('mobile-open');
+                });
+            }
 
-   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Actual vs Predicted
+            // Chart.js default configuration
+            Chart.defaults.responsive = true;
+            Chart.defaults.maintainAspectRatio = false;
+            Chart.defaults.plugins.legend.position = 'top';
+            Chart.defaults.plugins.legend.labels.usePointStyle = true;
+            Chart.defaults.plugins.legend.labels.padding = 20;
+
+            // Actual vs Predicted
     const ctxAP = document.getElementById('actualPredChart').getContext('2d');
     new Chart(ctxAP, {
       type: 'bar',
@@ -159,7 +277,7 @@
         });
       })
       .catch(err => console.error('PR-curve load failed:', err));
-  });
+  ;
 
   
 // Fraud over time
@@ -288,7 +406,7 @@ new Chart(ctxRate, {
 
 
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script>
+<!-- <script>
   const typed = new Typed("#typed", {
     strings: ["Analytics of Fraud Detection"],
     typeSpeed: 60,
@@ -296,7 +414,7 @@ new Chart(ctxRate, {
     loop: false,
     showCursor: false
   });
-</script>
+</script> -->
 
 </body>
 </html>

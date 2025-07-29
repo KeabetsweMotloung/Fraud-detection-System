@@ -30,7 +30,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Header Styles */
+
 header {
     position: fixed;
     top: 0;
@@ -119,9 +119,9 @@ header {
     border-radius: 1px;
 }
 
-/* Hero Section */
+
 .hero {
-    min-height: 100vh;
+    min-height: 110vh;
     display: flex;
     align-items: center;
     padding: 0 2rem;

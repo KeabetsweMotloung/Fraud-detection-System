@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IntegriTech - About page</title>
+    <title>About IntegriTech - Advanced Fraud Detection</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/about_style.css') }}">
 </head>
 <body>
@@ -14,68 +15,159 @@
                 <img src="{{ url_for('static', filename='images/Integritech.png') }}" alt="IntegriTech Logo">
             </div>
             <nav>
-                <ul class="navigation">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="navigation" id="navigation">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="#about" class="active">About</a></li>
+                    <li><a href="#model">Our Model</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
                 </ul>
             </nav>
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
         </div>
     </header>
 
     <main>
-        <section class="hero" id="home">
+      
+        <section class="hero" id="about">
             <div class="hero-container">
-                <div class="hero-content">
-                    <h1>Advanced Fraud Detection Powered by AI</h1>
-                    <p>Protect your business with cutting-edge machine learning algorithms that detect fraudulent activities in real-time. Stay ahead of threats with IntegriTech's intelligent security platform.</p>
-                    <div class="cta-buttons">
-                        <a href="{{ url_for('dashboard') }}" class="btn-primary">Get Started</a>
-                        <a href="{{ url_for('about') }}" class="btn-secondary">Learn More</a>
+                <h1>Revolutionizing Fraud Detection</h1>
+                <p>At IntegriTech, we combine cutting-edge artificial intelligence with deep industry expertise to deliver the most advanced fraud detection platform available today. Our mission is to protect businesses from financial crime while maintaining seamless user experiences.</p>
+            </div>
+        </section>
+
+        <!-- Company Overview -->
+        <section class="section">
+            <div class="section-container">
+                <div class="overview-grid">
+                    <div class="overview-content animate-on-scroll">
+                        <h3>Our Vision</h3>
+                        <p>We envision a world where businesses can operate with complete confidence, knowing their transactions are protected by intelligent, adaptive security systems that learn and evolve with emerging threats.</p>
+                        
+                        <h3>Our Mission</h3>
+                        <p>To democratize access to enterprise-grade fraud detection technology, making advanced AI-powered security solutions accessible to organizations of all sizes while maintaining the highest standards of accuracy and performance.</p>
+                        
+                        <h3>Why We Started</h3>
+                        <p>Founded by a team of data scientists and cybersecurity experts, IntegriTech was born from the recognition that traditional rule-based fraud detection systems were failing to keep pace with increasingly sophisticated fraud patterns. We set out to build something better.</p>
                     </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="mockup-container">
-                        <img src="{{ url_for('static', filename='images/mockup.png') }}" alt="IntegriTech Dashboard Mockup" class="mockup-img">
+                    <div class="overview-visual animate-on-scroll">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">99.2%</div>
+                                <div class="stat-label">Accuracy Rate</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">50ms</div>
+                                <div class="stat-label">Response Time</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">$2.4M</div>
+                                <div class="stat-label">Fraud Prevented</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Clients Protected</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="features" id="features">
-            <div class="features-container">
-                <div class="features-header">
-                    <h2>Why Choose IntegriTech?</h2>
-                    <p>Experience next-generation fraud prevention with our comprehensive suite of AI-powered security tools designed for modern businesses.</p>
+        <!-- Model Architecture -->
+        <section class="section" id="model">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Our AI Model Architecture</h2>
+                    <p class="section-subtitle">Built on advanced machine learning algorithms and real-time data processing, our fraud detection system represents the cutting edge of financial security technology.</p>
                 </div>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <img src="{{ url_for('static', filename='images/handshake.jpeg') }}" alt="Integration" class="feature-icon">
-                        <h3>Seamless Integration</h3>
-                        <p>Effortlessly integrate with your existing systems through our robust APIs and SDKs. Deploy in minutes, not months, with minimal disruption to your workflow.</p>
+                <div class="model-grid">
+                    <div class="model-card animate-on-scroll">
+                        <div class="model-icon">
+                            <span class="material-icons-sharp">psychology</span>
+                        </div>
+                        <h3>Neural Network Core</h3>
+                        <p>Our deep learning model uses a sophisticated neural network architecture with multiple hidden layers, enabling pattern recognition across complex, high-dimensional transaction data with unprecedented accuracy.</p>
                     </div>
-                    <div class="feature-card">
-                        <img src="{{ url_for('static', filename='images/handshake.jpeg') }}" alt="Scalability" class="feature-icon">
-                        <h3>Enterprise Scalability</h3>
-                        <p>From startups to Fortune 500 companies, our platform scales dynamically to meet your growing security needs without compromising performance.</p>
+                    <div class="model-card animate-on-scroll">
+                        <div class="model-icon">
+                            <span class="material-icons-sharp">auto_graph</span>
+                        </div>
+                        <h3>Ensemble Learning</h3>
+                        <p>We combine multiple algorithms including Random Forest, Gradient Boosting, and Support Vector Machines to create a robust ensemble that reduces false positives while maintaining high detection rates.</p>
                     </div>
-                    <div class="feature-card">
-                        <img src="{{ url_for('static', filename='images/handshake.jpeg') }}" alt="Real-time Alerts" class="feature-icon">
-                        <h3>Real-Time Intelligence</h3>
-                        <p>Receive instant notifications for suspicious activities with our advanced monitoring system. Act fast to prevent fraud before it impacts your business.</p>
+                    <div class="model-card animate-on-scroll">
+                        <div class="model-icon">
+                            <span class="material-icons-sharp">speed</span>
+                        </div>
+                        <h3>Real-Time Processing</h3>
+                        <p>Our optimized inference engine processes transactions in real-time, providing instant fraud risk scores without impacting user experience or transaction flow.</p>
                     </div>
-                    <div class="feature-card">
-                        <img src="{{ url_for('static', filename='images/handshake.jpeg') }}" alt="Cost Effective" class="feature-icon">
-                        <h3>Cost-Effective Protection</h3>
-                        <p>Reduce fraud losses significantly while maintaining operational efficiency. Our solution pays for itself through prevented fraudulent transactions.</p>
+                    <div class="model-card animate-on-scroll">
+                        <div class="model-icon">
+                            <span class="material-icons-sharp">smart_toy</span>
+                        </div>
+                        <h3>Adaptive Learning</h3>
+                        <p>The model continuously learns from new fraud patterns and legitimate transactions, automatically updating its decision boundaries to stay ahead of evolving threats.</p>
+                    </div>
+                    <div class="model-card animate-on-scroll">
+                        <div class="model-icon">
+                            <span class="material-icons-sharp">security</span>
+                        </div>
+                        <h3>Feature Engineering</h3>
+                        <p>Advanced feature extraction algorithms identify hidden patterns in transaction metadata, user behavior, and network topology to create powerful predictive signals.</p>
+                    </div>
+                    <div class="model-card animate-on-scroll">
+                        <div class="model-icon">
+                            <span class="material-icons-sharp">analytics</span>
+                        </div>
+                        <h3>Explainable AI</h3>
+                        <p>Our model provides interpretable results with detailed explanations for each decision, ensuring compliance with regulatory requirements and building trust with stakeholders.</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Performance Metrics -->
+        <section class="section">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Performance Metrics</h2>
+                    <p class="section-subtitle">Our model has been rigorously tested and validated against industry benchmarks, consistently delivering superior performance across all key metrics.</p>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-card animate-on-scroll">
+                        <div class="metric-value">87.18%</div>
+                        <div class="metric-label">Detection Recall</div>
+                    </div>
+                    <div class="metric-card animate-on-scroll">
+                        <div class="metric-value">98.5%</div>
+                        <div class="metric-label">Precision Score</div>
+                    </div>
+                    <div class="metric-card animate-on-scroll">
+                        <div class="metric-value">0.035%</div>
+                        <div class="metric-label">False Positive Rate</div>
+                    </div>
+                    <div class="metric-card animate-on-scroll">
+                        <div class="metric-value">0.985</div>
+                        <div class="metric-label">ROC-AUC Score</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="section-container">
+                <h2>Ready to Secure Your Business?</h2>
+                <p>Join hundreds of companies that trust IntegriTech to protect their transactions and customers from fraud.</p>
+                <a href="{{ url_for('dashboard') }}" class="btn-primary">Explore Our Platform</a>
             </div>
         </section>
     </main>
@@ -86,104 +178,10 @@
                 <img src="{{ url_for('static', filename='images/Integritech.png') }}" alt="IntegriTech Logo">
                 <ul class="social-links">
                     <li><a href="#facebook"><img src="{{ url_for('static', filename='images/facebook.png') }}" alt="Facebook"></a></li>
-                    <li><a href="#youtube"><img src="{{ url_for('static', filename='images/youtube.png') }}" alt="YouTube"></a></li>
-                    <li><a href="#twitter"><img src="{{ url_for('static', filename='images/twitter.png') }}" alt="Twitter"></a></li>
-                    <li><a href="#instagram"><img src="{{ url_for('static', filename='images/instagram.png') }}" alt="Instagram"></a></li>
-                </ul>
-            </div>
-            <div class="footer-nav">
-                <ul>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#support">Support</a></li>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 IntegriTech. All Rights Reserved.</p>
-        </div>
+                    <li><a href="#youtube"><img src="{{ url_for('static', filename='images/youtube.png') }}" alt="youtube"></a></li>
+
+
+    </ul>
+    </div>
+    </div>
     </footer>
-
-    <script>
-        // Mobile menu toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navigation = document.querySelector('.navigation');
-
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navigation.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.navigation a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                navigation.classList.remove('active');
-            });
-        });
-
-        // Header scroll effect
-        let lastScrollY = window.scrollY;
-        const header = document.querySelector('header');
-
-        window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;
-            
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                header.style.transform = 'translateY(0)';
-            }
-            
-            lastScrollY = currentScrollY;
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe feature cards for scroll animations
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Parallax effect for hero background
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-    </script>
-</body>
-</html>
