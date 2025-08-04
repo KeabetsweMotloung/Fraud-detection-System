@@ -17,14 +17,10 @@ def test_models(X_train, y_train, X_test, y_test):
         'KNeighbors_Classifier': KNeighborsClassifier(),
         'SVC': SVC(),
         'Decision_Tree_Classifier': DecisionTreeClassifier(),
-
     }
 
-    for model_name, model in models.items():
-        # Train the model
+    for model_name, model in models.items():  
         model.fit(X_train, y_train)
-
-        # Make predictions
         y_train_pred = model.predict(X_train)
         y_test_pred = model.predict(X_test)
 
